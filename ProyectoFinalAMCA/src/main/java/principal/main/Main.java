@@ -1,10 +1,10 @@
 /**
  * 
  */
-package main;
+package principal.main;
 
-import models.*;
-import mDAO.*;
+import principal.models.*;
+import principal.persistencia.*;
 
 /**
  * @author Ángel
@@ -24,19 +24,24 @@ public class Main {
 		Producto p3 = new Producto("Camiseta", 50, 15.7);
 		Producto p4 = new Producto("Llavero", 200, 7.5);
 		ProductoDAO pDAO = new ProductoDAO();
-		
-		Usuario usu = new Usuario("paco777", "Paco Martin", "paco1234", "paco777@gmail.com", "Calle Quinto Pino n7");
+		Usuario u1 = new Usuario("paco777", "Paco Martin", "paco1234", "paco777@gmail.com", "Calle Quinto Pino n7");
 		UsuarioDAO uDAO = new UsuarioDAO();
+		
+		// ---- OBJETOS VACIOS ----
+		Producto pCtr = new Producto();
+		Usuario uCtr = new Usuario();
+		
+
 		//---- INSERCION DE DATOS ----
 		
 //		pDAO.createProducto(p1);
 //		pDAO.createProducto(p2);
 //		pDAO.createProducto(p3);
-		uDAO.createUsuario(usu);
+		uDAO.createUsuario(u1);
 		
 		//---- LECTURA DE DATOS ----
 		
-		pDAO.imprimirListaProductos(pDAO.readProducto());
+		pCtr.imprimirListaProductos(pDAO.readProducto());
 		
 		//---- ACTUALIZACION DE DATOS ----
 		

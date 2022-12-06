@@ -1,12 +1,12 @@
-package mDAO;
+package principal.persistencia;
 
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
-import models.Producto;
-import utils.JPAUtil;
+import principal.models.Producto;
+import principal.utils.JPAUtil;
 
 public class ProductoDAO {
 
@@ -53,19 +53,6 @@ public class ProductoDAO {
 	}
 
 	/**
-	 * Imprime por consola los objetos de tipo Producto que se encuentran dentro de
-	 * un ArtrayList<Producto>
-	 * 
-	 * @param ArrayList<Producto> listaProductos.
-	 */
-	public void imprimirListaProductos(ArrayList<Producto> listaProductos) {
-		System.out.println("\nLista Productos:");
-		for (Producto p : listaProductos) {
-			System.out.println(p.toString());
-		}
-	}
-
-	/**
 	 * Metodo que obtiene un producto segun su id y actualiza el precio segun el pasado por parametro.
 	 * @param id ID del producto.
 	 * @param precio Nuevo precio del producto.
@@ -75,8 +62,8 @@ public class ProductoDAO {
 		em.getTransaction().begin();
 		try {
 			Producto p = em.find(Producto.class, id);
-		p.setPrecio(precio);
-		em.getTransaction().commit();
+			p.setPrecio(precio);
+			em.getTransaction().commit();
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			System.err.println(e.getMessage());
@@ -95,8 +82,8 @@ public class ProductoDAO {
 		em.getTransaction().begin();
 		try {
 			Producto p = em.find(Producto.class, id);
-		p.setStock(stock);
-		em.getTransaction().commit();
+			p.setStock(stock);
+			em.getTransaction().commit();
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			System.err.println(e.getMessage());
@@ -106,7 +93,7 @@ public class ProductoDAO {
 	}
 	
 	/**
-	 * Metodo que obtiene un proucto segun su id y actualiza el nombre segun el pasado por parametro.
+	 * Metodo que obtiene un producto segun su id y actualiza el nombre segun el pasado por parametro.
 	 * @param id Id del producto.
 	 * @param nombre Nuevo nombre del producto.
 	 */
@@ -115,8 +102,8 @@ public class ProductoDAO {
 		em.getTransaction().begin();
 		try {
 			Producto p = em.find(Producto.class, id);
-		p.setNombre(nombre);
-		em.getTransaction().commit();
+			p.setNombre(nombre);
+			em.getTransaction().commit();
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			System.err.println(e.getMessage());
@@ -138,7 +125,26 @@ public class ProductoDAO {
 			p.setNombre(pNew.getNombre());
 			p.setStock(pNew.getStock());
 			p.setPrecio(pNew.getPrecio());
-		em.getTransaction().commit();
+			em.getTransaction().commit();
+		} catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		} finally {
+			em.close();
+		}
+	}
+	
+	/**
+	 * Metodo para borrar un objeto de tipo Producto de la BBDD.
+	 * @param id Id del Producto.
+	 */
+	public void deleteProducto(int id) {
+		EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+		em.getTransaction().begin();
+		try {
+			Producto p = em.find(Producto.class, id);
+			em.remove(em.contains(p)? p:em.merge(p));
+			em.getTransaction().commit();
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			System.err.println(e.getMessage());

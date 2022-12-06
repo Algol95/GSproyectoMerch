@@ -1,7 +1,9 @@
 /**
  * 
  */
-package models;
+package principal.models;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
 /**
@@ -103,6 +105,17 @@ public class Producto {
 		this.precio = precio;
 	}
 
+	/**
+	 * Imprime por consola los objetos de tipo Producto que se encuentran dentro de un ArrayList<Producto>.
+	 * @param ArrayList<Producto> listaProductos.
+	 */
+	public void imprimirListaProductos(ArrayList<Producto> listaProductos) {
+		System.out.println("\nLista Productos:");
+		for (Producto p : listaProductos) {
+			System.out.println(p.toString());
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + "]";
