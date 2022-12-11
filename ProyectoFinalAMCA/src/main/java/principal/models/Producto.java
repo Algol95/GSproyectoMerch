@@ -3,6 +3,8 @@
  */
 package principal.models;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -29,6 +31,9 @@ public class Producto {
 	@Column(name="precio")
 	private double precio;
 	
+	@ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
+	private Set<Pedido> pedidos;
+	
 	/**
 	 * Constructor por defecto
 	 */
@@ -47,6 +52,7 @@ public class Producto {
 		this.nombre = nombre;
 		this.stock = stock;
 		this.precio = precio;
+		pedidos = new HashSet<Pedido>();
 	}
 
 	/**
@@ -106,6 +112,20 @@ public class Producto {
 	}
 
 	/**
+	 * @return the pedidos
+	 */
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	/**
+	 * @param pedidos the pedidos to set
+	 */
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
+	/**
 	 * Imprime por consola los objetos de tipo Producto que se encuentran dentro de un ArrayList<Producto>.
 	 * @param ArrayList<Producto> listaProductos.
 	 */
@@ -121,6 +141,4 @@ public class Producto {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + "]";
 	}
 	
-	
-
 }

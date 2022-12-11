@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 
+import principal.models.Producto;
 import principal.models.Usuario;
 import principal.utils.JPAUtil;
 
@@ -214,6 +215,26 @@ public class UsuarioDAO {
 		} finally {
 			em.close();
 		}
+	}
+	
+	/**
+	 * Busca un objeto de tipo Usuario segun su ID.
+	 * @param id int ID del usuario.
+	 * @return Usuario.
+	 */
+	public Usuario buscaUsuario(int id) {
+		EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+		em.getTransaction().begin();
+		try {
+			Usuario u = em.find(Usuario.class, id);
+			return u;
+		} catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		} finally {
+			em.close();
+		}
+		return null;
 	}
 	
 }

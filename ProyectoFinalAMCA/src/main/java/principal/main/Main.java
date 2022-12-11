@@ -26,22 +26,31 @@ public class Main {
 		ProductoDAO pDAO = new ProductoDAO();
 		Usuario u1 = new Usuario("paco777", "Paco Martin", "paco1234", "paco777@gmail.com", "Calle Quinto Pino n7");
 		UsuarioDAO uDAO = new UsuarioDAO();
+		Pedido ped1 = new Pedido(false, u1.getDireccion(), u1);
+		PedidoDAO pedDAO = new PedidoDAO();
 		
 		// ---- OBJETOS VACIOS ----
 		Producto pCtr = new Producto();
 		Usuario uCtr = new Usuario();
 		
-
+		// --- Se establecen Datos
+		p1.getPedidos().add(ped1);
+		p2.getPedidos().add(ped1);
+		u1.getPedidos().add(ped1);
+		ped1.getProductos().add(p1);
+		ped1.getProductos().add(p2);
+		
 		//---- INSERCION DE DATOS ----
 		
-//		pDAO.createProducto(p1);
-//		pDAO.createProducto(p2);
-//		pDAO.createProducto(p3);
+		pDAO.createProducto(p1);
+		pDAO.createProducto(p2);
+		pDAO.createProducto(p3);
 		uDAO.createUsuario(u1);
+		pedDAO.createPedido(ped1);
 		
 		//---- LECTURA DE DATOS ----
 		
-		pCtr.imprimirListaProductos(pDAO.readProducto());
+//		pCtr.imprimirListaProductos(pDAO.readProducto());
 		
 		//---- ACTUALIZACION DE DATOS ----
 		

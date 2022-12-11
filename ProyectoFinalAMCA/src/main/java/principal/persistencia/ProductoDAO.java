@@ -93,6 +93,26 @@ public class ProductoDAO {
 	}
 	
 	/**
+	 * Metodo que obtiene un producto segun su id y actualiza su stock restandole una cantidad.
+	 * @param id ID del producto.
+	 * @param resta Unidades restadas.
+	 */
+	public void restarProductoStock(int id, int resta) {
+		EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+		em.getTransaction().begin();
+		try {
+			Producto p = em.find(Producto.class, id);
+			p.setStock(p.getStock()-resta);
+			em.getTransaction().commit();
+		} catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		} finally {
+			em.close();
+		}
+	}
+	
+	/**
 	 * Metodo que obtiene un producto segun su id y actualiza el nombre segun el pasado por parametro.
 	 * @param id Id del producto.
 	 * @param nombre Nuevo nombre del producto.
@@ -153,4 +173,24 @@ public class ProductoDAO {
 		}
 	}
 
+	/**
+	 * Busca un objeto de tipo Producto segun su ID.
+	 * @param id ID del producto.
+	 * @return Producto.
+	 */
+	public Producto buscaProducto(int id) {
+		EntityManager em = JPAUtil.getEntityManagerFactory().createEntityManager();
+		em.getTransaction().begin();
+		try {
+			Producto p = em.find(Producto.class, id);
+			return p;
+		} catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		} finally {
+			em.close();
+		}
+		return null;
+	}
+	
 }

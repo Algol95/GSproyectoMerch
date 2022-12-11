@@ -1,5 +1,8 @@
 package principal.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 
@@ -30,6 +33,9 @@ public class Usuario {
 	
 	@Column(name="rol")
 	private int rol;
+	
+	@OneToMany(mappedBy= "usuario",  fetch = FetchType.EAGER)
+	private Set<Pedido> pedidos;
 
 	/**
 	 * Constructor para usuarios estandar.
@@ -46,6 +52,7 @@ public class Usuario {
 		this.email = email;
 		this.direccion = direccion;
 		rol = 1;
+		pedidos = new HashSet<Pedido>();
 	}
 	
 	/**
@@ -64,6 +71,7 @@ public class Usuario {
 		this.email = email;
 		this.direccion = direccion;
 		this.rol= rol;
+		pedidos = new HashSet<Pedido>();
 	}
 	
 	public Usuario() {
@@ -167,7 +175,19 @@ public class Usuario {
 	public void setRol(int rol) {
 		this.rol = rol;
 	}
-	
-	
+
+	/**
+	 * @return the pedidos
+	 */
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	/**
+	 * @param pedidos the pedidos to set
+	 */
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 }

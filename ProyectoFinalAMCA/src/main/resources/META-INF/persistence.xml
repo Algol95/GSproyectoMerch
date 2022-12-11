@@ -12,8 +12,9 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
        <!--  <class>com.idGrupo.MavenHibernateProject.Modelo.Alumno</class>-->
              
-             <class>models.Usuario</class>
-             <class>models.Producto</class>
+             <class>principal.models.Usuario</class>
+             <class>principal.models.Producto</class>
+             <class>principal.models.Pedido</class>
              
                        
         <properties>
