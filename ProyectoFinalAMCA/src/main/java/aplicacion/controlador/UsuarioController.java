@@ -1,7 +1,6 @@
 package aplicacion.controlador;
  
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping; 
  
 import aplicacion.modelo.Usuario; 
-import aplicacion.persistencia.UsuarioDAO;
 import aplicacion.persistencia.UsuarioRepo;
 
 @RequestMapping("/usuarios")
@@ -23,7 +21,6 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
-	private UsuarioDAO crudUsuario = new UsuarioDAO( ); 
 
 	
 	@GetMapping(value={"","/"})
@@ -77,14 +74,12 @@ public class UsuarioController {
 		
 		return "redirect:/usuarios";
 		 
-	}
-	
-	  
+	} 
 	
 	@GetMapping({"/{id}"})
 	public String obtenerUsuario(Model model, @PathVariable Integer id) {
 	 
-		model.addAttribute("usuario", crudUsuario.buscaUsuario(id));
+		model.addAttribute("usuario", usuarioRepo.findById(id).get());
 		
 		return "usuario";
 	}

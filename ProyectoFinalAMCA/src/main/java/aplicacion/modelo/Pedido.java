@@ -33,7 +33,7 @@ public class Pedido {
 	private String direccion;
 	
 	@Column(name="precio_total")
-	private double precioTotal;
+	private double precioTotal = 0;
 	
 	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -155,6 +155,10 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 	
-	
+	public void calcularPrecioTotal () {
+		for (Producto p : productos) {
+			precioTotal += p.getPrecio();
+		}
+	}
 	
 }

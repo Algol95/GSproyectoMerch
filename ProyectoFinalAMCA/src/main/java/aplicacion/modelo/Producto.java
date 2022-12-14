@@ -26,10 +26,10 @@ public class Producto {
 	private String nombre;
 	
 	@Column(name="stock")
-	private int stock;
+	private int stock = 0;
 	
 	@Column(name="precio")
-	private double precio;
+	private double precio = 0;
 	
 	@ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
 	private Set<Pedido> pedidos;

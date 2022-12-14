@@ -5,8 +5,8 @@
 
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	  
-	<title>Alumno</title>
+
+	<title>Usuario</title>
 
 
 
@@ -30,8 +30,8 @@
 							<i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
 						</a>
 					</li>
-					<li class="breadcrumb-item"><a href="/alumnos">Alumnos</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Ficha de alumno</li>
+					<li class="breadcrumb-item"><a href="/usuarios">Usuarios</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Perfil de Usuario</li>
 				</ol>
 			</nav>
 		</div>
@@ -44,32 +44,53 @@
 			<div class="row pl-5 pr-5">
 				<div class="col-9">
 
-					<h5>Ficha de alumno</h5>
-					<div class="card border border-primary" th:object="${alumno}">
+					<h5>Ficha de usuario</h5>
+					<div class="card border border-primary" th:object="${usuario}">
 
 						<div class="card-body row pt-4 pb-4">
 							<div class="col-7">
 								<div class="card">
-									<div class="card-header text-dark bg-light">Ficha de alumno</div>
+									<div class="card-header text-dark bg-light"><i class="fa-solid fa-id-card"></i>&nbsp;Perfil</div>
 									<div class="card-body">
 										<div class="mb-2">
-											<h5 th:text="*{nombre}" class="card-text mb-2">With supporting text below as
+											<p class="card-text mb-2">Nombre de Usuario</p>
+											<h5 th:text="*{usu}" class="card-text mb-2">With supporting text below as
+												a natural lead-in to additional content.</h5>
+											<p class="card-text mb-2">Nombre y Apellidos</p>
+											<h5 th:text="*{nombreApellidos}" class="card-text mb-2">With supporting text
+												below as
+												a natural lead-in to additional content.</h5>
+											<p class="card-text mb-2">Direccion</p>
+											<h5 th:text="*{direccion}" class="card-text mb-2">With supporting text below
+												as
+												a natural lead-in to additional content.</h5>
+											<p class="card-text mb-2">Correo Electronico</p>
+											<h5 th:text="*{email}" class="card-text mb-2">With supporting text below as
 												a natural lead-in to additional content.</h5>
 										</div>
 
-										<p><a th:href="@{/alumnos}" class="btn btn-primary mt-3">Cerrar</a></p>
+										<p><a th:href="@{/usuarios}" class="btn btn-primary mt-3">Cerrar</a></p>
 									</div>
 								</div>
 							</div>
 							<div class="col-5">
 								<div class="card">
-									<div class="card-header text-dark bg-light">Pedidos que ha hecho este alumno</div>
+									<div class="card-header text-dark bg-light"><i class="fa-solid fa-basket-shopping"></i>
+										</svg>&nbsp;Pedidos</div>
 									<div class="card-body">
 
-										<span th:each="pedido : ${alumno.pedidos}">
-											<p><a th:text="${pedido.id}" th:href="@{/pedidos/{id}(id=${pedido.id})}"
-													class="card-text"> </a></p>
+										<span th:each="pedido : ${usuario.pedidos}">
+											<div class="mb-2">
+												<a th:text="${pedido.id}" class="btn btn-primary"
+													th:href="@{/pedidos/{id}(id=${pedido.id})}"> </a>
+												<span th:text="${pedido.precioTotal}+€" class="btn btn-secondary" />
+												<span th:if="${pedido.entregado == true}"
+													class="btn btn-success">Entregado</span>
+												<span th:if="${pedido.entregado == false}" class="btn btn-warning">En
+													Reparto</span>
 
+											</div>
+										</span>
 									</div>
 								</div>
 							</div>

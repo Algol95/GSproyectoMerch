@@ -60,7 +60,7 @@
 						</a>
 					</td>
 					<td>
-							<span th:text="${usuario.usu}">R1: Di V.</span>
+						<span th:text="${usuario.usu}">R1: Di V.</span>
 					</td>
 
 					<td>
@@ -75,11 +75,15 @@
 					<td>
 						<a class="btn btn-primary btn-sm btn-sm text-white pointer" style="cursor:pointer"
 							data-toggle="modal" data-target="#modal-edit"
-							th:attr="data-target='#modal-edit'+${usuario.id}">*</a>
+							th:attr="data-target='#modal-edit'+${usuario.id}">
+							<i class="fa-solid fa-pen"></i>
+						</a>
 					</td>
 					<td>
 						<a class="btn btn-danger btn-sm text-white pointer" style="cursor:pointer" data-toggle="modal"
-							data-target="#modal-delete" th:attr="data-target='#modal-delete'+${usuario.id}">x</a>
+							data-target="#modal-delete" th:attr="data-target='#modal-delete'+${usuario.id}">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
 					</td>
 
 
@@ -104,16 +108,21 @@
 										th:object="${usuarioaEditar}" method="post">
 										<div class="form-row">
 											<div class="form-group  mt-1">
-												
+
 												<label for="texto">Nick de Usuario</label>
 												<input type="text" th:field="*{usu}" class="form-control"
 													id="exampleInputEmail1" th:attr="placeholder=${usuario.usu}" />
 												<label for="texto">Nombre y Apellidos</label>
-												<input type="text" th:field="*{nombreApellidos}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${usuario.nombreApellidos}" />
+												<input type="text" th:field="*{nombreApellidos}" class="form-control"
+													id="exampleInputEmail1"
+													th:attr="placeholder=${usuario.nombreApellidos}" />
 												<label for="texto">Direccion Asociada</label>
-												<input type="text" th:field="*{direccion}" class="form-control" id="exampleInputEmail1" th:attr="placeholder=${usuario.direccion}" />
+												<input type="text" th:field="*{direccion}" class="form-control"
+													id="exampleInputEmail1"
+													th:attr="placeholder=${usuario.direccion}" />
 												<label for="texto">Correo Electronico</label>
-												<input type="text" th:field="*{email}" class="form-control" th:attr="placeholder=${usuario.email}" />
+												<input type="text" th:field="*{email}" class="form-control"
+													th:attr="placeholder=${usuario.email}" />
 												<!--	<input type="hidden" th:field="*{id}"> -->
 											</div>
 										</div>
@@ -176,7 +185,7 @@
 			<div class="p-5">
 				<button type="button" class="btn btn-primary float-right" data-toggle="modal"
 					data-target="#crearMensaje">
-					+
+					<i class="fa-solid fa-plus"></i>
 				</button>
 
 			</div>
@@ -194,23 +203,23 @@
 						</button>
 					</div>
 
-
-
-
 					<form action="#" th:action="@{/usuarios/add}" th:object="${nuevoUsuario}" method="post">
 						<div class="modal-body">
 							<div class="form-row">
 								<div class="form-group  mt-4">
 									<label for="texto">Nick de Usuario</label>
-									<input type="text" th:field="*{usu}" class="form-control" placeholder="Usuario" />
+									<input type="text" th:field="*{usu}" class="form-control" placeholder="Usuario" required/>
 									<label for="texto">Nombre y Apellidos</label>
-									<input type="text" th:field="*{nombreApellidos}" class="form-control" placeholder="Nombre y Apellidos" />
+									<input type="text" th:field="*{nombreApellidos}" class="form-control"
+										placeholder="Nombre y Apellidos" required/>
 									<label for="texto">Direccion Asociada</label>
-									<input type="text" th:field="*{direccion}" class="form-control" placeholder="Direccion" />
+									<input type="text" th:field="*{direccion}" class="form-control"
+										placeholder="Direccion" required/>
 									<label for="texto">Correo Electronico</label>
-									<input type="text" th:field="*{email}" class="form-control" placeholder="Correo" />
+									<input type="text" th:field="*{email}" class="form-control" placeholder="Correo" required />
 									<label for="texto">Contraseña</label>
-									<input type="text" th:field="*{password}" class="form-control" placeholder="Contraseña" />
+									<input type="password" th:field="*{password}" class="form-control"
+										placeholder="Contraseña" required/>
 								</div>
 							</div>
 						</div>
