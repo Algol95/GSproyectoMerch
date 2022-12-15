@@ -52,21 +52,35 @@
 								<div class="card">
 									<div class="card-header text-dark bg-light"><i class="fa-solid fa-id-card"></i>&nbsp;Perfil</div>
 									<div class="card-body">
-										<div class="mb-2">
-											<p class="card-text mb-2">Nombre de Usuario</p>
+										<div class="mb-2 card">
+											<div class="card-body">
+											<h6 class="card-subtitle mb-2 text-muted">Nombre de Usuario</h6>
 											<h5 th:text="*{usu}" class="card-text mb-2">With supporting text below as
 												a natural lead-in to additional content.</h5>
-											<p class="card-text mb-2">Nombre y Apellidos</p>
+											</div>
+										</div>
+										<div class="mb-2 card">
+											<div class="card-body">
+											<h6 class="card-subtitle mb-2 text-muted">Nombre y Apellidos</h6>
 											<h5 th:text="*{nombreApellidos}" class="card-text mb-2">With supporting text
 												below as
 												a natural lead-in to additional content.</h5>
-											<p class="card-text mb-2">Direccion</p>
+											</div>
+										</div>
+										<div class="mb-2 card">
+											<div class="card-body">
+											<h6 class="card-subtitle mb-2 text-muted">Direccion</h6>
 											<h5 th:text="*{direccion}" class="card-text mb-2">With supporting text below
 												as
 												a natural lead-in to additional content.</h5>
-											<p class="card-text mb-2">Correo Electronico</p>
+											</div>
+										</div>
+										<div class="mb-2 card">
+											<div class="card-body">
+											<h6 class="card-subtitle mb-2 text-muted">Correo Electronico</h6>
 											<h5 th:text="*{email}" class="card-text mb-2">With supporting text below as
 												a natural lead-in to additional content.</h5>
+											</div>
 										</div>
 
 										<p><a th:href="@{/usuarios}" class="btn btn-primary mt-3">Cerrar</a></p>
@@ -80,7 +94,8 @@
 									<div class="card-body">
 
 										<span th:each="pedido : ${usuario.pedidos}">
-											<div class="mb-2">
+											<div class="mb-2 card">
+											<div class="card-body">
 												<a th:text="${pedido.id}" class="btn btn-primary"
 													th:href="@{/pedidos/{id}(id=${pedido.id})}"> </a>
 												<span th:text="${pedido.precioTotal}+€" class="btn btn-secondary" />
@@ -88,7 +103,7 @@
 													class="btn btn-success">Entregado</span>
 												<span th:if="${pedido.entregado == false}" class="btn btn-warning">En
 													Reparto</span>
-
+											</div>
 											</div>
 										</span>
 									</div>

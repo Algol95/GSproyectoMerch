@@ -7,10 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 
-	<title>Usuarios</title>
-
-
-
+	<title>Productos</title>
 
 </head>
 
@@ -30,7 +27,7 @@
 							<i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
 						</a>
 					</li>
-					<li class="breadcrumb-item">Usuarios</li>
+					<li class="breadcrumb-item">Productos</li>
 				</ol>
 			</nav>
 		</div>
@@ -40,55 +37,54 @@
 			<thead class="table-dark bg-info text-white  ">
 				<tr>
 					<th scope="col"> Id </th>
-					<th scope="col"> Nick de Usuario </th>
-					<th scope="col"> Nombre y Apellidos</th>
-					<th scope="col"> Direccion Asociada</th>
-					<th scope="col"> Correo Electronico </th>
+					<th scope="col"> Nombre </th>
+					<th scope="col"> Precio</th>
+					<th scope="col"> Stock</th>
+					<th scope="col"> Caracteristicas</th>
 					<th scope="col"> Editar </th>
 					<th scope="col"> Borrar </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${usuarios.empty}">
-					<td colspan="7"> No hay usuarios</td>
+				<tr th:if="${productos.empty}">
+					<td colspan="7"> No hay productos</td>
 				</tr>
-				<tr th:each="usuario : ${usuarios}">
+				<tr th:each="producto : ${productos}">
 
 					<td>
-						<a class="btn btn-primary btn-sm" th:href="@{/usuarios/{id}(id=${usuario.id})}">
-							<span th:text="${usuario.id}">"Estos son dos romanos:"</span>
-						</a>
+<!--						<a class="btn btn-primary btn-sm" th:href="@{/productos/{id}(id=${producto.id})}">-->
+							<span class="btn btn-primary btn-sm" th:text="${producto.id}">ID productos</span>
+<!--						</a>-->
 					</td>
 					<td>
-						<span th:text="${usuario.usu}">R1: Di V.</span>
-					</td>
-
-					<td>
-						<span th:text="${usuario.nombreApellidos}">R2: V.</span>
+						<span th:text="${producto.nombre}">Nombre productos</span>
 					</td>
 					<td>
-						<span th:text="${usuario.direccion}">R1: Pues por el culo te la inco. Te falta coliseo.</span>
+						<span th:text="${producto.precio}+€">Precio productos</span>
 					</td>
 					<td>
-						<span th:text="${usuario.email}">a</span>
+						<span th:text="${producto.stock}">Stock productos</span>
+					</td>
+					<td>
+						<span th:text="${producto.caracteristicas}">Caracteristicas productos</span>
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm btn-sm text-white pointer" style="cursor:pointer"
 							data-toggle="modal" data-target="#modal-edit"
-							th:attr="data-target='#modal-edit'+${usuario.id}">
+							th:attr="data-target='#modal-edit'+${producto.id}">
 							<i class="fa-solid fa-pen"></i>
 						</a>
 					</td>
 					<td>
 						<a class="btn btn-danger btn-sm text-white pointer" style="cursor:pointer" data-toggle="modal"
-							data-target="#modal-delete" th:attr="data-target='#modal-delete'+${usuario.id}">
+							data-target="#modal-delete" th:attr="data-target='#modal-delete'+${producto.id}">
 							<i class="fa-solid fa-trash-can"></i>
 						</a>
 					</td>
 
 
 					<!-- edit modal-->
-					<div class="modal fade" th:id="modal-edit+${usuario.id}">
+					<div class="modal fade" th:id="modal-edit+${producto.id}">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -98,38 +94,39 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<p class="error-text">Introduce nombre nuevo para el usuario:
-										<strong><span th:text="${usuario.nombreApellidos}"></span></strong>
+									<p class="error-text">Introduce parametros nuevos del producto:
+										<strong><span th:text="${producto.nombre}"></span></strong>
 									</p>
 
 
 									<!-- Formulario edit-->
-									<form action="#" th:action="@{/usuarios/edit/{id}(id=${usuario.id})}"
-										th:object="${usuarioaEditar}" method="post">
+									<form action="#" th:action="@{/productos/edit/{id}(id=${producto.id})}"
+										th:object="${productoaEditar}" method="post">
 										<div class="form-row">
 											<div class="form-group  mt-1">
 												<div class="input-group mb-3">
-													<span class="input-group-text">Nick</span>
-													<input type="text" th:field="*{usu}" class="form-control"
-														id="exampleInputEmail1" th:attr="placeholder=${usuario.usu}" />
-												</div>
-												<div class="input-group mb-3">
-													<span class="input-group-text">Nombre y Apellidos</span>
-													<input type="text" th:field="*{nombreApellidos}"
-														class="form-control" id="exampleInputEmail1"
-														th:attr="placeholder=${usuario.nombreApellidos}" />
-												</div>
-												<div class="input-group mb-3">
-													<span class="input-group-text">Direccion</span>
-													<input type="text" th:field="*{direccion}" class="form-control"
+													<span class="input-group-text">Nombre</span>
+													<input type="text" th:field="*{nombre}" class="form-control"
 														id="exampleInputEmail1"
-														th:attr="placeholder=${usuario.direccion}" />
+														th:attr="placeholder=${producto.nombre}" />
 												</div>
 												<div class="input-group mb-3">
-													<span class="input-group-text"><i
-															class="fa-solid fa-envelope"></i></span>
-													<input type="email" th:field="*{email}" class="form-control"
-														th:attr="placeholder=${usuario.email}" />
+													<span class="input-group-text">Precio</span>
+													<input type="number" th:field="*{precio}" class="form-control"
+														id="exampleInputEmail1" th:attr="placeholder=${producto.precio}" step="0.01" min="0.01"
+														 />
+												</div>
+												<div class="input-group mb-3">
+													<span class="input-group-text">Stock</span>
+													<input type="number" th:field="*{stock}" class="form-control"
+														id="exampleInputEmail1" th:attr="placeholder=${producto.stock}"
+														min="0" step="1"/>
+												</div>
+												<div class="input-group mb-3">
+													<span class="input-group-text">Caracteristicas</span>
+													<textarea th:field="*{caracteristicas}" class="form-control"
+														th:attr="placeholder=${producto.caracteristicas}"
+														maxlength="600" rows="10" />
 												</div>
 											</div>
 										</div>
@@ -153,7 +150,7 @@
 					<!--end edit modal-->
 
 					<!--delete modal-->
-					<div class="modal fade" th:id="modal-delete+${usuario.id}">
+					<div class="modal fade" th:id="modal-delete+${producto.id}">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -164,13 +161,13 @@
 								</div>
 								<div class="modal-body">
 									<p class="error-text"><strong>¿Seguro que deseas borrar a
-											<span th:text="${usuario.usu}"></span>?</strong></p>
+											<span th:text="${producto.nombre}"></span>?</strong></p>
 								</div>
 								<div class="modal-footer">
 									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">
 										Cancelar
 									</button>
-									<a th:href="@{/usuarios/delete/{id}(id=${usuario.id})}">
+									<a th:href="@{/productos/delete/{id}(id=${producto.id})}">
 										<span class="btn btn-danger btn-sm" value="delete">Borrar</span></a>
 
 								</div>
@@ -204,55 +201,47 @@
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title" id="exampleModalLabel">Nuevo Usuario</h4>
+						<h4 class="modal-title" id="exampleModalLabel">Nuevo Producto</h4>
 						<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true"><i class="fa-solid fa-x"></i></span>
 						</button>
 					</div>
 
-					<form action="#" th:action="@{/usuarios/add}" th:object="${nuevoUsuario}" method="post"
+					<form action="#" th:action="@{/productos/add}" th:object="${nuevoProducto}" method="post"
 						class="was-validated">
 						<div class="modal-body">
 							<div class="form-row">
 								<div class="form-group  mt-4">
 									<div class="input-group mb-3">
-										<span class="input-group-text">Nick</span>
-										<input type="text" th:field="*{usu}" class="form-control" placeholder="Usuario"
-											required />
+										<span class="input-group-text">Nombre</span>
+										<input type="text" th:field="*{nombre}" class="form-control"
+											placeholder="Nombre" required />
 										<div class="invalid-feedback">
-											Falta nick de usuario.
+											Falta nombre del producto.
 										</div>
 									</div>
 									<div class="input-group mb-3">
-										<span class="input-group-text">Nombre y Apellidos</span>
-										<input type="text" th:field="*{nombreApellidos}" class="form-control"
-											placeholder="Nombre y Apellidos" required />
+										<span class="input-group-text">Caracteristicas</span>
+										<textarea th:field="*{caracteristicas}" class="form-control"
+											placeholder="Caracteristicas" maxlength="600" rows="10" required />
 										<div class="invalid-feedback">
-											Faltan nombre y apellios.
+											Faltan las caracteristicas del producto.
 										</div>
 									</div>
 									<div class="input-group mb-3">
-										<span class="input-group-text">Direccion</span>
-										<input type="text" th:field="*{direccion}" class="form-control"
-											placeholder="Direccion" required />
+										<span class="input-group-text">Precio</span>
+										<input type="number" th:field="*{precio}" class="form-control" min=0.01
+											placeholder="0.01" step="0.01" required />
 										<div class="invalid-feedback">
-											Falta direccion asociada.
+											Falta precio del producto.
 										</div>
 									</div>
 									<div class="input-group mb-3">
-										<span class="input-group-text"><i class="fa-solid fa-envelope"></i></span>
-										<input type="email" th:field="*{email}" class="form-control" placeholder="Correo"
-											required />
+										<span class="input-group-text">Stock</span>
+										<input type="number" th:field="*{stock}" class="form-control" placeholder="0"
+											min="0" required />
 										<div class="invalid-feedback">
-											Direccion de email invalida.
-										</div>
-									</div>
-									<div class="input-group mb-3">
-										<span class="input-group-text">Contraseña</span>
-										<input type="password" th:field="*{password}" class="form-control"
-											placeholder="Contraseña" required />
-										<div class="invalid-feedback">
-											Direccion de email invalida.
+											Falta stock del producto.
 										</div>
 									</div>
 								</div>

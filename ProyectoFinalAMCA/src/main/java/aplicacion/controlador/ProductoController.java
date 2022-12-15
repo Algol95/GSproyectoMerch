@@ -48,7 +48,7 @@ public class ProductoController {
 		productoRepo.save(producto);
 		System.out.println("Insertando Usuario nuevo: "+ producto.getNombre());	
 				
-		return "redirect:/usuarios";	
+		return "redirect:/productos";	
 	}
 	
 	@PostMapping("/edit/{id}")
@@ -63,6 +63,9 @@ public class ProductoController {
 		}
 		if(producto.getStock() != 0) {
 			proActualizar.setStock(producto.getStock());
+		}
+		if(producto.getCaracteristicas() != "") {
+			proActualizar.setCaracteristicas(producto.getCaracteristicas());
 		}
 		
 		productoRepo.save(proActualizar);

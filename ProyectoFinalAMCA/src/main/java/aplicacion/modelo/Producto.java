@@ -29,7 +29,10 @@ public class Producto {
 	private int stock = 0;
 	
 	@Column(name="precio")
-	private double precio = 0;
+	private double precio;
+	
+	@Column(name="caracteristicas")
+	private String caracteristicas;
 	
 	@ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
 	private Set<Pedido> pedidos;
@@ -47,11 +50,11 @@ public class Producto {
 	 * @param precio
 	 * Producto con nombre, stock y precio.
 	 */
-	public Producto(String nombre, int stock, double precio) {
-		super();
+	public Producto(String nombre, int stock, double precio, String caracteristicas) {
 		this.nombre = nombre;
 		this.stock = stock;
 		this.precio = precio;
+		this.caracteristicas = caracteristicas;
 		pedidos = new HashSet<Pedido>();
 	}
 
@@ -123,6 +126,14 @@ public class Producto {
 	 */
 	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+
+	public String getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(String caracteristicas) {
+		this.caracteristicas = caracteristicas;
 	}
 
 	/**
