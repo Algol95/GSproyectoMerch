@@ -47,6 +47,7 @@ public class PedidoController {
 
 		usuCliente.getPedidos().add(pedidoNuevo);
 		pedidoNuevo.setUsuario(usuCliente);
+		pedidoNuevo.setDireccion(usuCliente.getDireccion());
 
 		pedidoRepo.save(pedidoNuevo);
 
