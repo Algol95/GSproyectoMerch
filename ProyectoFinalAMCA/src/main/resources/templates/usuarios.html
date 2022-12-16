@@ -9,9 +9,6 @@
 
 	<title>Usuarios</title>
 
-
-
-
 </head>
 
 <body id="page-top">
@@ -35,7 +32,6 @@
 			</nav>
 		</div>
 
-		<!-- lista de alumnos -->
 		<table class="table  table-hover">
 			<thead class="table-dark bg-info text-white  ">
 				<tr>
@@ -56,21 +52,21 @@
 
 					<td>
 						<a class="btn btn-primary btn-sm" th:href="@{/usuarios/{id}(id=${usuario.id})}">
-							<span th:text="${usuario.id}">"Estos son dos romanos:"</span>
+							<span th:text="${usuario.id}">ID Usuario</span>
 						</a>
 					</td>
 					<td>
-						<span th:text="${usuario.usu}">R1: Di V.</span>
+						<span th:text="${usuario.usu}">Nick Usuario</span>
 					</td>
 
 					<td>
-						<span th:text="${usuario.nombreApellidos}">R2: V.</span>
+						<span th:text="${usuario.nombreApellidos}">NomApe Usuario</span>
 					</td>
 					<td>
-						<span th:text="${usuario.direccion}">R1: Pues por el culo te la inco. Te falta coliseo.</span>
+						<span th:text="${usuario.direccion}">Direccion Usuario</span>
 					</td>
 					<td>
-						<span th:text="${usuario.email}">a</span>
+						<span th:text="${usuario.email}">@ Usuario</span>
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm btn-sm text-white pointer" style="cursor:pointer"
@@ -129,7 +125,7 @@
 													<span class="input-group-text"><i
 															class="fa-solid fa-envelope"></i></span>
 													<input type="email" th:field="*{email}" class="form-control"
-														th:attr="placeholder=${usuario.email}" />
+														th:attr="placeholder=${usuario.email}"/>
 												</div>
 											</div>
 										</div>

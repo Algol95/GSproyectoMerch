@@ -12,7 +12,7 @@ public class WebApplication {
 	@GetMapping("/")
 	String home() {
 		 
-		return "index";
+		return "admin";
 			
 	}
 	
