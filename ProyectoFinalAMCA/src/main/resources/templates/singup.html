@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+ 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+    crossorigin="anonymous"></script>
+    
+    
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	 
+ 
+
+  	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css">
+  
+	  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  <script>
+		  $( function() {
+			    $( "#datepicker" ).datepicker({dateFormat:'dd/mm/yy'});
+			  } );
+	  </script>    
+	  
+	  <script>
+		  $( function() {
+			    $( "#datepicker2" ).datepicker({dateFormat:'dd/mm/yy'});
+			  } );
+	  </script>  	
+	  
+	  <script>
+	  
+	  function comprobar()
+	  {   
+	      if (document.getElementById("habilitador").checked)
+	        document.getElementById('datepicker2').disabled = false;
+	          
+	      else
+	        document.getElementById('datepicker2').disabled = true;
+	          
+	  }
+	  </script>    
+	<title>Login</title>
+
+</head>
+
+<body>
+
+	<div class="container mt-3">
+		<div class="row">
+			<aside class="col-sm-6">
+				<div class="card">
+					<article class="card-body">
+
+						<h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+						<hr>
+						<p class="text-success text-center">Some message goes here</p>
+						<form>
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+									</div>
+									<input name="" class="form-control" placeholder="User" type="text">
+								</div> <!-- input-group.// -->
+							</div> <!-- form-group// -->
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-user"></i> </span>
+									</div>
+									<input name="" class="form-control" placeholder="Email" type="email">
+								</div> <!-- input-group.// -->
+							</div> <!-- form-group// -->
+							<div class="form-group">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+									</div>
+									<input class="form-control" placeholder="******" type="password">
+								</div> <!-- input-group.// -->
+							</div> <!-- form-group// -->
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block"> Login </button>
+							</div> <!-- form-group// -->
+							<p class="text-center"><a href="#" class="btn">Forgot password?</a></p>
+					</article>
+				</div> <!-- card.// -->
+			</aside>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

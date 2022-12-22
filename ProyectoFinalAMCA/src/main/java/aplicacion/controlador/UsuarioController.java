@@ -46,7 +46,6 @@ public class UsuarioController {
 	
 	@PostMapping("/add")
 	public String addUsuario(@ModelAttribute("nuevoUsuario") Usuario usuario, BindingResult bindingResult) {
-		usuario.setRol(1);
 		usuarioRepo.save(usuario);
 		System.out.println("Insertando Usuario nuevo: "+usuario.getNombreApellidos());	
 				
@@ -57,8 +56,8 @@ public class UsuarioController {
 	public String editarUsuario(@PathVariable Integer id, @ModelAttribute("usuarioaEditar") Usuario usuario,BindingResult bindingResult) {
 		
 		Usuario uActualizar = usuarioRepo.findById(id).get();
-		if(usuario.getUsu() != "") {
-			uActualizar.setUsu(usuario.getUsu());
+		if(usuario.getUsername() != "") {
+			uActualizar.setUsu(usuario.getUsername());
 		}
 		if(usuario.getNombreApellidos() != "") {
 			uActualizar.setNombreApellidos(usuario.getNombreApellidos());

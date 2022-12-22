@@ -1,16 +1,22 @@
 package aplicacion.modelo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.*;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 
 @Entity
 @Table(name="usuario")
-public class Usuario {
+public class Usuario implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +38,8 @@ public class Usuario {
 	@Column(name="direccion")
 	private String direccion;
 	
-	@Column(name="rol")
-	private int rol;
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
+	private Set<Rol> roles;
 	
 	@OneToMany(mappedBy= "usuario",  fetch = FetchType.EAGER)
 	private Set<Pedido> pedidos;
@@ -52,27 +58,9 @@ public class Usuario {
 		this.password = password;
 		this.email = email;
 		this.direccion = direccion;
-		rol = 1;
 		pedidos = new HashSet<Pedido>();
-	}
-	
-	/**
-	 * Constructor para usuarios, cualquier tipo.
-	 * @param usu
-	 * @param nombreApellidos
-	 * @param password
-	 * @param email
-	 * @param direccion
-	 * @param rol 0=Admin 1=Estandar
-	 */
-	public Usuario(String usu, String nombreApellidos, String password, String email, String direccion, int rol) {
-		this.usu = usu;
-		this.nombreApellidos = nombreApellidos;
-		this.password = password;
-		this.email = email;
-		this.direccion = direccion;
-		this.rol= rol;
-		pedidos = new HashSet<Pedido>();
+		roles = new HashSet<Rol>();
+		
 	}
 	
 	public Usuario() {
@@ -93,10 +81,11 @@ public class Usuario {
 		this.id = id;
 	}
 
+	@Override
 	/**
 	 * @return the usu
 	 */
-	public String getUsu() {
+	public String getUsername() {
 		return usu;
 	}
 
@@ -164,20 +153,6 @@ public class Usuario {
 	}
 
 	/**
-	 * @return the rol
-	 */
-	public int getRol() {
-		return rol;
-	}
-
-	/**
-	 * @param rol the rol to set
-	 */
-	public void setRol(int rol) {
-		this.rol = rol;
-	}
-
-	/**
 	 * @return the pedidos
 	 */
 	public Set<Pedido> getPedidos() {
@@ -189,6 +164,15 @@ public class Usuario {
 	 */
 	public void setPedidos(Set<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+	
+
+	public Set<Rol> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Rol> roles) {
+		this.roles = roles;
 	}
 
 	public void imprimirListaUsuario(ArrayList<Usuario> listaUsuarios) {
@@ -202,6 +186,37 @@ public class Usuario {
 	public String toString() {
 		return "Usuario [id=" + id + ", usu=" + usu + ", nombreApellidos=" + nombreApellidos + ", password=" + password
 				+ ", email=" + email + ", direccion=" + direccion + "]";
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return this.roles.stream().map(role -> new SimpleGrantedAuthority(role.getRol())).collect(Collectors.toList());
+	}
+
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 	
 	
