@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping; 
- 
-import aplicacion.modelo.Usuario; 
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import aplicacion.modelo.Rol;
+import aplicacion.modelo.Usuario;
+import aplicacion.persistencia.RolRepo;
 import aplicacion.persistencia.UsuarioRepo;
 
 @RequestMapping("/usuarios")
@@ -21,6 +23,8 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
+	@Autowired
+	private RolRepo rolRepo;
 
 	
 	@GetMapping(value={"","/"})
@@ -46,6 +50,8 @@ public class UsuarioController {
 	
 	@PostMapping("/add")
 	public String addUsuario(@ModelAttribute("nuevoUsuario") Usuario usuario, BindingResult bindingResult) {
+		Rol rol = rolRepo.findById(1).get();
+		usuario.getRoles().add(rol);
 		usuarioRepo.save(usuario);
 		System.out.println("Insertando Usuario nuevo: "+usuario.getNombreApellidos());	
 				
@@ -57,7 +63,7 @@ public class UsuarioController {
 		
 		Usuario uActualizar = usuarioRepo.findById(id).get();
 		if(usuario.getUsername() != "") {
-			uActualizar.setUsu(usuario.getUsername());
+			uActualizar.setUsername(usuario.getUsername());
 		}
 		if(usuario.getNombreApellidos() != "") {
 			uActualizar.setNombreApellidos(usuario.getNombreApellidos());

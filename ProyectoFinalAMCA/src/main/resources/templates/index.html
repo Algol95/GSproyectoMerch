@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+	<title>Merchandising App</title>
+
+	<!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">-->
+
+	<!-- Bootstrap core CSS -->
+	<!-- <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
+
+	<!-- Custom styles for this template -->
+	<!-- <link href="album.css" rel="stylesheet">-->
+</head>
+
+<body>
+
+	<header>
+
+		<div th:insert="top::top"></div>
+
+
+	</header>
+
+	<main role="main">
+
+		<section class="jumbotron text-center p-5">
+			<div class="container">
+				<h1 sec:authorize="isAuthenticated()" class="nav-item dropdown text-gray-900 jumbotron-heading">
+
+					Bienvenid@ <span sec:authentication="principal.username" />!!
+				</h1>
+				<p class="lead text-muted">Tienda Web</p>
+				<div th:if=${param.logout} class="alert alert-info text-center">¡¡Vuelve pronto!!</div>
+			</div>
+		</section>
+
+		<div class="album py-5 bg-light">
+			<div class="container" sec:authorize="isAnonymous()">
+
+				<div class="row">
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top"
+								src="https://media.istockphoto.com/id/1268691831/es/foto/teclado-moderno-con-bot%C3%B3n-de-registro-en-l%C3%ADnea-azul.jpg?s=612x612&w=0&k=20&c=tB3_1AkOwNyzUVYOhfRSk0PB1M43R9mQ05sHMUpUMGY="
+								alt="Card image Usuarios">
+							<div class="card-body">
+								<p class="card-text"><strong>Registrate</strong><br>Registrate para acceder a nuestras
+									caracteristicas</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a th:href="@{/registro}"> <button type="button"
+												class="btn btn-sm btn-outline-secondary">Registrate</button>
+										</a>
+										<!-- <button type="button" class="btn btn-sm btn-outline-secondary">Pedidos</button> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top"
+								src="https://cdn.pixabay.com/photo/2019/01/28/11/56/registration-3960205_960_720.jpg"
+								alt="Card image Usuarios">
+							<div class="card-body">
+								<p class="card-text"><strong>Login</strong><br>Inicia sesión para acceder a nuestras
+									caracteristicas</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a th:href="@{/login}"> <button type="button"
+												class="btn btn-sm btn-outline-secondary">Conéctate</button>
+										</a>
+										<!-- <button type="button" class="btn btn-sm btn-outline-secondary">Pedidos</button> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container" sec:authorize="isAuthenticated()">
+
+				<div class="row ">
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top"
+								src="https://cdn.pixabay.com/photo/2020/03/27/17/03/shopping-4974313_960_720.jpg"
+								alt="Card image Usuarios">
+							<div class="card-body">
+								<p class="card-text"><strong>Ver Tienda</strong><br>Mira aqui nuestros productos</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a th:href="@{/tienda}"> <button type="button"
+												class="btn btn-sm btn-outline-secondary">Tienda</button>
+										</a>
+										<!-- <button type="button" class="btn btn-sm btn-outline-secondary">Pedidos</button> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4" sec:authorize="hasAuthority('ROLE_ADMIN')">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top"
+								src="https://cdn.pixabay.com/photo/2020/10/01/17/11/store-5619201_960_720.jpg"
+								alt="Card image Pedidos">
+							<div class="card-body">
+								<p class="card-text"><strong>Menu Administrador</strong><br>Administra el sistema</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a th:href="@{/admin}"> <button type="button"
+												class="btn btn-sm btn-outline-secondary">Admin</button></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+
+	</main>
+
+	<footer class="text-muted">
+		<div class="container">
+			<p class="float-right">
+				<a href="#">Back to top</a>
+			</p>
+			<p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+			<p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a
+					href="../../getting-started/">getting started guide</a>.</p>
+		</div>
+	</footer>
+
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/vendor/holder.min.js"></script>-->
+</body>
+
+</html>

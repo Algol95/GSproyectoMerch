@@ -32,7 +32,7 @@
 			</nav>
 		</div>
 
-		<table class="table  table-hover">
+		<table class="table table-hover">
 			<thead class="table-dark bg-info text-white  ">
 				<tr>
 					<th scope="col"> Id </th>
@@ -56,7 +56,7 @@
 						</a>
 					</td>
 					<td>
-						<span th:text="${usuario.usu}">Nick Usuario</span>
+						<span th:text="${usuario.username}">Nick Usuario</span>
 					</td>
 
 					<td>
@@ -106,8 +106,8 @@
 											<div class="form-group  mt-1">
 												<div class="input-group mb-3">
 													<span class="input-group-text">Nick</span>
-													<input type="text" th:field="*{usu}" class="form-control"
-														id="exampleInputEmail1" th:attr="placeholder=${usuario.usu}" />
+													<input type="text" th:field="*{username}" class="form-control"
+														id="exampleInputEmail1" th:attr="placeholder=${usuario.username}" />
 												</div>
 												<div class="input-group mb-3">
 													<span class="input-group-text">Nombre y Apellidos</span>
@@ -160,7 +160,7 @@
 								</div>
 								<div class="modal-body">
 									<p class="error-text"><strong>¿Seguro que deseas borrar a
-											<span th:text="${usuario.usu}"></span>?</strong></p>
+											<span th:text="${usuario.username}"></span>?</strong></p>
 								</div>
 								<div class="modal-footer">
 									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">
@@ -213,7 +213,7 @@
 								<div class="form-group  mt-4">
 									<div class="input-group mb-3">
 										<span class="input-group-text">Nick</span>
-										<input type="text" th:field="*{usu}" class="form-control" placeholder="Usuario"
+										<input type="text" th:field="*{username}" class="form-control" placeholder="Usuario"
 											required />
 										<div class="invalid-feedback">
 											Falta nick de usuario.

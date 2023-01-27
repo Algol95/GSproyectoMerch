@@ -1,10 +1,9 @@
 package aplicacion.modelo.dto;
+// Data Transfer Object
 
 public class UsuarioDTO {
-
-	private int id;
 	
-	private String usu;
+	private String username;
 	
 	private String nombreApellidos;
 	
@@ -14,20 +13,13 @@ public class UsuarioDTO {
 	
 	private String direccion;
 
-	public int getId() {
-		return id;
+
+	public String getUsername() {
+		return username;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getUsu() {
-		return usu;
-	}
-
-	public void setUsu(String usu) {
-		this.usu = usu;
+	public void setUsername(String usu) {
+		this.username = usu;
 	}
 
 	public String getNombreApellidos() {
@@ -61,7 +53,18 @@ public class UsuarioDTO {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
+	public UsuarioDTO() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	
+	public UsuarioDTO(String usu, String nombreApellidos, String password, String email, String direccion) {
+		super();
+		this.username = usu;
+		this.nombreApellidos = nombreApellidos;
+		this.password = password;
+		this.email = email;
+		this.direccion = direccion;
+	}
 	
 }

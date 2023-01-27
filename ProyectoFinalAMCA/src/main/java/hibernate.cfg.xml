@@ -14,6 +14,7 @@
         <mapping class="aplicacion.modelo.Usuario"/>
         <mapping class="aplicacion.modelo.Pedido"/>
         <mapping class="aplicacion.modelo.Producto"/>
+        <mapping class="aplicacion.modelo.Rol"/>
     </session-factory>
 </hibernate-configuration>
 

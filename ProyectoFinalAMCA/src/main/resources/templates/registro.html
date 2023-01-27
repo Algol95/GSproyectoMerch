@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<title>Registro</title>
+
+</head>
+
+<body>
+
+	<header>
+
+		<div th:insert="top::top"></div>
+	</header>
+
+	<div class="container mt-3">
+		<div class="row">
+			<aside class="col-sm-6">
+				<div class="card">
+					<article class="card-body">
+
+						<h4 class="card-title text-center mb-4 mt-1">Registro</h4>
+						<hr>
+						<div th:if=${param.exito}>
+						<p class="text-success text-center">Se ha registrado correctamente</p>
+						</div>
+						
+						<form th:action="@{/registro}" method="post" th:object=${usuario}>
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> Usu </span>
+									</div>
+									<input name="" class="form-control" placeholder="usuario" type="text" th:field="*{username}" required>
+								</div> <!-- input-group.// -->
+							</div>
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> Nombre </span>
+									</div>
+									<input class="form-control" placeholder="Nombre y Apellidos" type="text" th:field="*{nombreApellidos}" required>
+								</div> <!-- input-group.// -->
+								<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> Email </span>
+									</div>
+									<input class="form-control" placeholder="correo" type="email" th:field="*{email}" required>
+								</div> <!-- input-group.// -->
+							</div> <!-- form-group// -->
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> Direccion </span>
+									</div>
+									<input class="form-control" placeholder="Direccion" type="text" th:field="*{direccion}" required>
+								</div> <!-- input-group.// -->
+							<div class="form-group">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text"> Pass </span>
+									</div>
+									<input class="form-control" placeholder="******" type="password" th:field="*{password}" required>
+								</div> <!-- input-group.// -->
+							</div> <!-- form-group// -->
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block"> Login </button>
+							</div> <!-- form-group// -->
+							<br>
+							<div class="form-group">
+								<p class="text-center"><a class="btn btn-info" th:href="@{/login}">Ya tengo cuenta</a></p>
+								<p class="text-center"><a class="btn btn-secondary" th:href="@{/}">Volver</a></p>
+							</div>
+							</form>
+					</article>
+				</div> <!-- card.// -->
+			</aside>
+		</div>
+	</div>
+
+
+</body>
+
+</html>

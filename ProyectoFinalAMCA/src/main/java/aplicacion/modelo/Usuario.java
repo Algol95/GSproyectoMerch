@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name="usuario")
 public class Usuario implements UserDetails {
@@ -24,7 +25,7 @@ public class Usuario implements UserDetails {
 	private int id;
 	
 	@Column(name="nick",unique=true)
-	private String usu;
+	public String username;
 	
 	@Column(name="nombre_apellidos")
 	private String nombreApellidos;
@@ -39,28 +40,27 @@ public class Usuario implements UserDetails {
 	private String direccion;
 	
 	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
-	private Set<Rol> roles;
+	private Collection<Rol> roles;
 	
 	@OneToMany(mappedBy= "usuario",  fetch = FetchType.EAGER)
 	private Set<Pedido> pedidos;
 
 	/**
-	 * Constructor para usuarios estandar.
+	 * Constructor para usuarios .
 	 * @param usu
 	 * @param nombreApellidos
 	 * @param password
 	 * @param email
 	 * @param direccion
 	 */
-	public Usuario(String usu, String nombreApellidos, String password, String email, String direccion) {
-		this.usu = usu;
+	public Usuario(String usu, String nombreApellidos, String password, String email, String direccion, Collection<Rol> roles) {
+		this.username = usu;
 		this.nombreApellidos = nombreApellidos;
 		this.password = password;
 		this.email = email;
 		this.direccion = direccion;
-		pedidos = new HashSet<Pedido>();
-		roles = new HashSet<Rol>();
-		
+		this.roles = roles;
+		pedidos = new HashSet<Pedido>();		
 	}
 	
 	public Usuario() {
@@ -86,14 +86,14 @@ public class Usuario implements UserDetails {
 	 * @return the usu
 	 */
 	public String getUsername() {
-		return usu;
+		return username;
 	}
 
 	/**
 	 * @param usu the usu to set
 	 */
-	public void setUsu(String usu) {
-		this.usu = usu;
+	public void setUsername(String usu) {
+		this.username = usu;
 	}
 
 	/**
@@ -167,7 +167,7 @@ public class Usuario implements UserDetails {
 	}
 	
 
-	public Set<Rol> getRoles() {
+	public Collection<Rol> getRoles() {
 		return roles;
 	}
 
@@ -184,7 +184,7 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", usu=" + usu + ", nombreApellidos=" + nombreApellidos + ", password=" + password
+		return "Usuario [id=" + id + ", usu=" + username + ", nombreApellidos=" + nombreApellidos + ", password=" + password
 				+ ", email=" + email + ", direccion=" + direccion + "]";
 	}
 

@@ -15,6 +15,7 @@
              <class>aplicacion.modelo.Usuario</class>
              <class>aplicacion.modelo.Producto</class>
              <class>aplicacion.modelo.Pedido</class>
+             <class>aplicacion.modelo.Rol</class>
              
                        
         <properties>

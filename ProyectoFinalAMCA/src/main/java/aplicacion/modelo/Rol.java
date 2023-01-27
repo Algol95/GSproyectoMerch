@@ -1,5 +1,6 @@
 package aplicacion.modelo;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -23,10 +24,10 @@ public class Rol {
 	@Column(name="id")
 	public int id;
 	
-	@Column(name="roles")
+	@Column(name="role")
 	public String rol;
 	
-	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "roles_usuarios",
 			joinColumns = {@JoinColumn(name = "id_rol")},
@@ -57,6 +58,14 @@ public class Rol {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+
+	public Rol(String rol) {
+		super();
+		this.rol = rol;
+		usuarios = new HashSet<Usuario>();
+	}
+	
+	public Rol() {};
 	
 	
 	

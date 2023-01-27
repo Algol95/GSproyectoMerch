@@ -51,7 +51,7 @@
 
 					<div class="topbar-divider d-none d-sm-block"></div>
 
-					<li class="nav-item dropdown no-arrow">
+					<li class="nav-item dropdown no-arrow" sec:authorize="hasAuthority('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle text-gray-600" href="/usuarios" role="button">
 							<i class="fas fa-users fa-sm fa-fw mr-3 text-gray-600"></i>
 							Usuarios
@@ -60,15 +60,15 @@
 
 					<div class="topbar-divider d-none d-sm-block"></div>
 
-					<li class="nav-item dropdown no-arrow">
-						<a class="nav-link dropdown-toggle text-gray-600" href="/pedidos" role="button">
+					<li class="nav-item dropdown no-arrow" sec:authorize="isAuthenticated()">
+						<a class="nav-link dropdown-toggle text-gray-600"  role="button">
 							<i class="fas fa-basket-shopping fa-sm fa-fw mr-3 text-gray-600"></i>
 							Pedidos
 						</a>
 					</li>
 					<div class="topbar-divider d-none d-sm-block"></div>
 
-					<li class="nav-item dropdown no-arrow">
+					<li class="nav-item dropdown no-arrow" sec:authorize="hasAuthority('ROLE_ADMIN')">
 						<a class="nav-link dropdown-toggle text-gray-600" href="/productos" role="button">
 							<i class="fas fa-solid fa-heart fa-sm fa-fw mr-3 text-gray-600"></i>
 							Productos

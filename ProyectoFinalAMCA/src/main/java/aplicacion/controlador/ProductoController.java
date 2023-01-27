@@ -24,7 +24,7 @@ public class ProductoController {
 
 	
 	@GetMapping(value={"","/"})
-	String Usuarios(Model model) {
+	String Productos(Model model) {
 		
 		List<Producto> lista = productoRepo.findAll();
 		model.addAttribute("productos",lista );
@@ -39,7 +39,7 @@ public class ProductoController {
 		 
 		System.out.println("Insertando Producto nuevo: "+pro);		
 		
-		return "redirect:/usuarios";
+		return "redirect:/productos";
 	}
 	
 	

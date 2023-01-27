@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<title>Tienda</title>
+
+</head>
+
+<body id="page-top">
+	<!-- top -->
+	<!-- top -->
+	<!-- top -->
+	<div th:insert="top::top"></div>
+	<div class="container">
+
+
+		<div class="m-5">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/">
+							<i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
+						</a>
+					</li>
+					<li class="breadcrumb-item">Tienda</li>
+				</ol>
+			</nav>
+		</div>
+		<div class="album py-5 bg-light">
+
+			<div class="container">
+
+				<div class="row ">
+					<div class="col-md-4 " th:each="producto : ${productos}">
+						<div class="card mb-4 box-shadow">
+							<img class="card-img-top"
+								src="https://dummyimage.com/600x400/8f8f8f/ffffff.png"
+								alt="Card image Usuarios">
+							<div class="card-body">
+								<p class="card-text"><strong th:text="${producto.nombre}">Nombre Producto</strong> - <strong th:text="${producto.precio}+€" class="text-primary">Precio</strong><br><p th:text="${producto.caracteristicas}">Caracteristicas</p></p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a> <button type="button"
+												class="btn btn-sm btn-outline-primary">Comprar</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		
+</body>
+
+
+</html>

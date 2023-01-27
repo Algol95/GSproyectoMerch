@@ -125,7 +125,7 @@
 													<span class="input-group-text">Caracteristicas</span>
 													<textarea th:field="*{caracteristicas}" class="form-control"
 														th:attr="placeholder=${producto.caracteristicas}"
-														maxlength="600" rows="10" />
+														maxlength="255" rows="10" />
 												</div>
 											</div>
 										</div>
@@ -222,7 +222,7 @@
 									<div class="input-group mb-3">
 										<span class="input-group-text">Caracteristicas</span>
 										<textarea th:field="*{caracteristicas}" class="form-control"
-											placeholder="Caracteristicas" maxlength="600" rows="10" required />
+											placeholder="Caracteristicas" maxlength="255" rows="10" required />
 										<div class="invalid-feedback">
 											Faltan las caracteristicas del producto.
 										</div>
