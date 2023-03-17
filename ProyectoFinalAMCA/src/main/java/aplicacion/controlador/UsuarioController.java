@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import aplicacion.modelo.Rol;
 import aplicacion.modelo.Usuario;
 import aplicacion.persistencia.RolRepo;
 import aplicacion.persistencia.UsuarioRepo;
+
 
 @RequestMapping("/usuarios")
 @Controller

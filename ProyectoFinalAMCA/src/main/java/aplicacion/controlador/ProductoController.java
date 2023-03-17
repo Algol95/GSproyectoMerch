@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import aplicacion.modelo.Producto;
 import aplicacion.persistencia.ProductoRepo;
+
+
 
 @RequestMapping("/productos")
 @Controller
@@ -22,7 +25,7 @@ public class ProductoController {
 	@Autowired
 	private ProductoRepo productoRepo;
 
-	
+
 	@GetMapping(value={"","/"})
 	String Productos(Model model) {
 		
@@ -34,13 +37,13 @@ public class ProductoController {
 		return "productos";
 	}
 
-	@GetMapping(value="/add/{nombre}")
-	public String insertarProducto(Model model, @PathVariable String pro ) {
-		 
-		System.out.println("Insertando Producto nuevo: "+pro);		
-		
-		return "redirect:/productos";
-	}
+//	@GetMapping(value="/add/{nombre}")
+//	public String insertarProducto(Model model, @PathVariable String pro ) {
+//		 
+//		System.out.println("Insertando Producto nuevo: "+pro);		
+//		
+//		return "redirect:/productos";
+//	}
 	
 	
 	@PostMapping("/add")

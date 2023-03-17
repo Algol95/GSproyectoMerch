@@ -6,9 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import aplicacion.modelo.dto.UsuarioDTO;
 import aplicacion.servicio.interfaces.UsuarioService;
+
 
 @RequestMapping("/registro")
 @Controller
