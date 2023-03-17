@@ -11,6 +11,44 @@
 
 
 </head>
+<script>
+$(document).ready(function(){
+	$("#editAjax").submit(function(event){
+		console.log("Hi");
+		event.preventDefault;
+		fire_ajax_submit();
+	});
+});
+
+function fire_ajax_submit(){
+	var alumnoDTO = {};
+	alumnoDTO["nombre"] = $("#nombreAjax").val;
+	alumnoDTO["id"]= $("idAjax").text();
+	
+	console.log(alumnoDTO);
+	
+	$("#editAjax").prop("disable",true);
+	console.log(JSON.stringify(alumnoDTO));
+	
+	//peticion asincrona
+	$.ajax({
+		type: "POST",
+		contentType: "application/json",
+		url: "/alumnos/guardarAjax", //acceder a metoo del controlador
+		data: JSON.stringify(alumnoDTO),
+		datatype: 'json',
+		cache: false,
+		timeout: 10000,
+		success: function(data){
+			var json = "<h5>Respuesta Ajax</h5><br>"+JSON.stringify(data,null,4);
+			$("#respuestaAjax").html(json);	
+		},
+		error: function(e){
+			console.log("ERROR: ", e);
+		}
+	});
+};
+</script>
 
 <body id="page-top">
 	<!-- top -->
@@ -106,6 +144,9 @@
 											</div>
 											</div>
 										</span>
+									</div>
+									<div class="card-body">
+										div
 									</div>
 								</div>
 							</div>

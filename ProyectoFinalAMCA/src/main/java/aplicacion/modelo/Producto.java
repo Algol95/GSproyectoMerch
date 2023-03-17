@@ -4,6 +4,7 @@
 package aplicacion.modelo;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -34,8 +35,11 @@ public class Producto {
 	@Column(name="caracteristicas")
 	private String caracteristicas;
 	
-	@ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
-	private Set<Pedido> pedidos;
+	@OneToMany(mappedBy= "producto", cascade = CascadeType.ALL, orphanRemoval = true,  fetch = FetchType.EAGER)
+	private Set<ProductosPedidos> pedidos;
+	
+//	@ManyToMany(mappedBy = "productos", fetch = FetchType.EAGER)
+//	private Set<Pedido> pedidos;
 	
 	/**
 	 * Constructor por defecto
@@ -55,7 +59,7 @@ public class Producto {
 		this.stock = stock;
 		this.precio = precio;
 		this.caracteristicas = caracteristicas;
-		pedidos = new HashSet<Pedido>();
+		pedidos = new HashSet<ProductosPedidos>();
 	}
 
 	/**
@@ -117,14 +121,14 @@ public class Producto {
 	/**
 	 * @return the pedidos
 	 */
-	public Set<Pedido> getPedidos() {
+	public Set<ProductosPedidos> getPedidos() {
 		return pedidos;
 	}
 
 	/**
 	 * @param pedidos the pedidos to set
 	 */
-	public void setPedidos(Set<Pedido> pedidos) {
+	public void setPedidos (Set<ProductosPedidos> pedidos) {
 		this.pedidos = pedidos;
 	}
 
@@ -152,4 +156,17 @@ public class Producto {
 		return "Producto [id=" + id + ", nombre=" + nombre + ", stock=" + stock + ", precio=" + precio + "]";
 	}
 	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto pro = (Producto) o;
+        return Objects.equals(nombre, pro.nombre);
+    }
+ 
+    @Override
+    public int hashCode() {
+        return Objects.hash(nombre);
+    }
 }
+

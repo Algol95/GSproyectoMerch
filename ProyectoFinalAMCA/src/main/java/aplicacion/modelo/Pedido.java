@@ -1,6 +1,7 @@
 package aplicacion.modelo;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -35,13 +37,19 @@ public class Pedido {
 	@Column(name="precio_total")
 	private double precioTotal = 0;
 	
-	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
-	@JoinTable(
-			name = "pedidos_productos",
-			joinColumns = {@JoinColumn(name = "id_pedido")},
-			inverseJoinColumns = {@JoinColumn(name = "id_producto")}
-	)	
-	private Set<Producto> productos;
+	@Column(name="pagado")
+	private boolean pagado;
+	
+	@OneToMany(mappedBy= "pedido", cascade = CascadeType.ALL, orphanRemoval = true,  fetch = FetchType.EAGER)
+	private Set<ProductosPedidos> productos;
+	
+//	@ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
+//	@JoinTable(
+//			name = "pedidos_productos",
+//			joinColumns = {@JoinColumn(name = "id_pedido")},
+//			inverseJoinColumns = {@JoinColumn(name = "id_producto")}
+//	)	
+//	private Set<Producto> productos;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_usu", nullable = false)
@@ -56,15 +64,18 @@ public class Pedido {
 	 * @param productos
 	 * @param usuario
 	 */
-	public Pedido(boolean entregado, String direccion, Usuario usuario) {
-		this.entregado = entregado;
+	public Pedido(String direccion, Usuario usuario, double precioTotal) {
+		entregado = false;
+		pagado = false;
 		this.direccion = direccion;
-		productos = new HashSet<Producto>();
+		this.precioTotal = precioTotal;
+		//productos = new HashSet<Producto>();
 		precioTotal = 0;
-		for (Producto p : productos) {
-			precioTotal += p.getPrecio();
-		}
+//		for (Producto p : productos) {
+//			precioTotal += p.getPrecio();
+//		}
 		this.usuario = usuario;
+		productos = new HashSet<ProductosPedidos>();
 	}
 	
 	public Pedido() {
@@ -127,19 +138,12 @@ public class Pedido {
 		this.precioTotal = precioTotal;
 	}
 
-	/**
-	 * @return the productos
-	 */
-	public Set<Producto> getProductos() {
-		return productos;
-	}
+	public void addProducto(Producto pro, Integer cantidad) {
+        ProductosPedidos productosPedidos = new ProductosPedidos(this, pro, cantidad);
+        productos.add(productosPedidos);
+        pro.getPedidos().add(productosPedidos);
 
-	/**
-	 * @param productos the productos to set
-	 */
-	public void setProductos(Set<Producto> productos) {
-		this.productos = productos;
-	}
+    }
 
 	/**
 	 * @return the usuario
@@ -155,10 +159,38 @@ public class Pedido {
 		this.usuario = usuario;
 	}
 	
-	public void calcularPrecioTotal () {
-		for (Producto p : productos) {
-			precioTotal += p.getPrecio();
-		}
+	public boolean isPagado() {
+		return pagado;
 	}
+
+	public void setPagado(boolean pagado) {
+		this.pagado = pagado;
+	}
+
+	public Set<ProductosPedidos> getProductosPedido() {
+		return productos;
+	}
+
+	public void setProductsPedidos(Set<ProductosPedidos> productos) {
+		this.productos = productos;
+	}
+
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pedido ped = (Pedido) o;
+        return Objects.equals(direccion, ped.direccion);
+    }
+ 
+    @Override
+    public int hashCode() {
+        return Objects.hash(direccion);
+    }
+//	public void calcularPrecioTotal () {
+//		for (Producto p : productos) {
+//			precioTotal += p.getPrecio();
+//		}
+//	}
 	
 }

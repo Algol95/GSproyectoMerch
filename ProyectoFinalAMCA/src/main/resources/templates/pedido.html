@@ -1,0 +1,19 @@
+<div class=" row pl-5 pr-5">
+
+	<form th:action"@{/pedidos/addPedido/{id}" th:object= "${ProductosPedidosNew}" meth>
+		<div class="mb-2">
+			<label for="texto">Agragar productos al pedido</label>
+			<div class="col-7">
+				<select th:field="*{producto.id}" class="form-control" id="producto">
+				<option th:each="prodtucto:${listaproductos}" th:value="{producto.id}" th:text="{producto.nombre}" th:selected="" value="">Seleccionar bocadillo</option>
+				</select>
+			</div>
+			<div>
+				<label for="texto">Cantidad</label>
+				<input type="number" th:field="*{cantidad}" class="form-control" placeholder="1"/>
+			</div>
+			</div>
+			<input type="submit" value="+" class="btn btn-primary m-3"/>
+		</div>
+	</form>
+</div>

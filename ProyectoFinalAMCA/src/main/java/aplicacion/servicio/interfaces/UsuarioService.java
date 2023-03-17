@@ -15,4 +15,6 @@ public interface UsuarioService extends UserDetailsService{
 	@Bean
 	public Usuario save(UsuarioDTO usuarioRegistroDTO);
 	
+	
+	
 }

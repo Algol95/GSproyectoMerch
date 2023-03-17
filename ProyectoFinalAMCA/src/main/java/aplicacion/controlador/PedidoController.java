@@ -32,33 +32,32 @@ public class PedidoController {
 		model.addAttribute("usuarios", usuarioRepo.findAll());
 		model.addAttribute("listaproductos", productoRepo.findAll());
 		model.addAttribute("pedidos", pedidoRepo.findAll());
-
 		model.addAttribute("pedidoNuevo", new Pedido());
 
 		return "pedidos";
 	}
 
-	@PostMapping("/add")
-	public String addPedido(@ModelAttribute("pedidoNuevo") Pedido pedidoNuevo, BindingResult bindingResult) {
-
-		pedidoNuevo.calcularPrecioTotal();
-
-		Usuario usuCliente = usuarioRepo.findById(pedidoNuevo.getUsuario().getId()).get();
-
-		usuCliente.getPedidos().add(pedidoNuevo);
-		pedidoNuevo.setUsuario(usuCliente);
-		pedidoNuevo.setDireccion(usuCliente.getDireccion());
-
-		pedidoRepo.save(pedidoNuevo);
-
-		for (Producto pro : pedidoNuevo.getProductos()) {
-			pro.getPedidos().add(pedidoNuevo);
-			pro.setStock(pro.getStock()-1);
-			productoRepo.save(pro);
-		}
-
-		return "redirect:/pedidos";
-	}
+//	@PostMapping("/add")
+//	public String addPedido(@ModelAttribute("pedidoNuevo") Pedido pedidoNuevo, BindingResult bindingResult) {
+//
+//		pedidoNuevo.calcularPrecioTotal();
+//
+//		Usuario usuCliente = usuarioRepo.findById(pedidoNuevo.getUsuario().getId()).get();
+//
+//		usuCliente.getPedidos().add(pedidoNuevo);
+//		pedidoNuevo.setUsuario(usuCliente);
+//		pedidoNuevo.setDireccion(usuCliente.getDireccion());
+//
+//		pedidoRepo.save(pedidoNuevo);
+//
+//		for (Producto pro : pedidoNuevo.getProductos()) {
+//			pro.getPedidos().add(pedidoNuevo);
+//			pro.setStock(pro.getStock()-1);
+//			productoRepo.save(pro);
+//		}
+//
+//		return "redirect:/pedidos";
+//	}
 
 	@GetMapping({ "/{id}" })
 	public String obtenerPedido(Model model, @PathVariable Integer id) {

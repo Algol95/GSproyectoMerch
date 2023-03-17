@@ -50,7 +50,7 @@ public class ProductoController {
 				
 		return "redirect:/productos";	
 	}
-	
+	 
 	@PostMapping("/edit/{id}")
 	public String editarProducto(@PathVariable Integer id, @ModelAttribute("productoaEditar") Producto producto,BindingResult bindingResult) {
 		

@@ -15,6 +15,8 @@
         <mapping class="aplicacion.modelo.Pedido"/>
         <mapping class="aplicacion.modelo.Producto"/>
         <mapping class="aplicacion.modelo.Rol"/>
+        <mapping class="aplicacion.modelo.ProductosPedidos"/>
+        <mapping class="aplicacion.modelo.ProductosPedidosId"/>
     </session-factory>
 </hibernate-configuration>
 

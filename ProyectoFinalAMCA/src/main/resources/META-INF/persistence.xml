@@ -16,6 +16,8 @@
              <class>aplicacion.modelo.Producto</class>
              <class>aplicacion.modelo.Pedido</class>
              <class>aplicacion.modelo.Rol</class>
+             <class>aplicacion.modelo.ProductosPedidos</class>
+              <class>aplicacion.modelo.ProductosPedidosId</class>
              
                        
         <properties>
