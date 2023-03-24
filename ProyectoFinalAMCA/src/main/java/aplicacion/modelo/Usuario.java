@@ -39,10 +39,10 @@ public class Usuario implements UserDetails {
 	@Column(name="direccion")
 	private String direccion;
 	
-	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Collection<Rol> roles;
 	
-	@OneToMany(mappedBy= "usuario",  fetch = FetchType.EAGER)
+	@OneToMany(mappedBy= "usuario",  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private Set<Pedido> pedidos;
 
 	/**
@@ -63,9 +63,20 @@ public class Usuario implements UserDetails {
 		pedidos = new HashSet<Pedido>();		
 	}
 	
-	public Usuario() {
-		
+	public Usuario(String usu, String nombreApellidos, String password, String email, String direccion) {
+		this.username = usu;
+		this.nombreApellidos = nombreApellidos;
+		this.password = password;
+		this.email = email;
+		this.direccion = direccion;
+		roles = new HashSet<Rol>();
+		pedidos = new HashSet<Pedido>();		
 	}
+	
+	public Usuario() {
+		roles = new HashSet<Rol>();
+	}
+	
 
 	/**
 	 * @return the id

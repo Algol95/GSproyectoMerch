@@ -54,17 +54,17 @@ public class ProductoController {
 		return "redirect:/productos";	
 	}
 	 
-	@PostMapping("/edit/{id}")
-	public String editarProducto(@PathVariable Integer id, @ModelAttribute("productoaEditar") Producto producto,BindingResult bindingResult) {
+	@PostMapping("/edit/{idPro}")
+	public String editarProducto(@PathVariable Integer idPro, @ModelAttribute("productoaEditar") Producto producto, BindingResult bindingResult) {
 		
-		Producto proActualizar = productoRepo.findById(id).get();
+		Producto proActualizar = productoRepo.findById(idPro).get();
 		if(producto.getNombre() != "") {
 			proActualizar.setNombre(producto.getNombre());
 		}
-		if(producto.getPrecio() != 0) {
+		if(producto.getPrecio() != null) {
 			proActualizar.setPrecio(producto.getPrecio());
 		}
-		if(producto.getStock() != 0) {
+		if(producto.getStock() != null) {
 			proActualizar.setStock(producto.getStock());
 		}
 		if(producto.getCaracteristicas() != "") {
@@ -93,6 +93,7 @@ public class ProductoController {
 	@GetMapping({"/delete/{id}"})
 	public String borrarProducto(@PathVariable Integer id) {
 		
+		System.out.println(id);
 		productoRepo.deleteById(id);
 		
 		return "redirect:/productos";

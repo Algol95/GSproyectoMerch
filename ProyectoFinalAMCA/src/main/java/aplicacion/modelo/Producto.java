@@ -27,10 +27,10 @@ public class Producto {
 	private String nombre;
 	
 	@Column(name="stock")
-	private int stock = 0;
+	private Integer stock;
 	
 	@Column(name="precio")
-	private double precio;
+	private Double precio;
 	
 	@Column(name="caracteristicas")
 	private String caracteristicas;
@@ -45,7 +45,7 @@ public class Producto {
 	 * Constructor por defecto
 	 */
 	public Producto() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class Producto {
 	 * @param precio
 	 * Producto con nombre, stock y precio.
 	 */
-	public Producto(String nombre, int stock, double precio, String caracteristicas) {
+	public Producto(String nombre, Integer stock, Double precio, String caracteristicas) {
 		this.nombre = nombre;
 		this.stock = stock;
 		this.precio = precio;
@@ -93,28 +93,28 @@ public class Producto {
 	/**
 	 * @return the stock
 	 */
-	public int getStock() {
+	public Integer getStock() {
 		return stock;
 	}
 
 	/**
 	 * @param stock the stock to set
 	 */
-	public void setStock(int stock) {
+	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
 
 	/**
 	 * @return the precio
 	 */
-	public double getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
 	/**
 	 * @param precio the precio to set
 	 */
-	public void setPrecio(double precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 

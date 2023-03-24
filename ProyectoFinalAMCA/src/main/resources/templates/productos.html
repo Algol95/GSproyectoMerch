@@ -99,27 +99,22 @@
 
 
 									<!-- Formulario edit-->
-									<form action="#" th:action="@{/productos/edit/{idPro}(id=${producto.id})}"
+									<form action="#" th:action="@{/productos/edit/{idPro}(idPro=${producto.id})}"
 										th:object="${productoaEditar}" method="post">
 										<div class="form-row">
 											<div class="form-group  mt-1">
 												<div class="input-group mb-3">
 													<span class="input-group-text">Nombre</span>
 													<input type="text" th:field="*{nombre}" class="form-control"
-														id="exampleInputEmail1"
 														th:attr="placeholder=${producto.nombre}" />
 												</div>
 												<div class="input-group mb-3">
 													<span class="input-group-text">Precio</span>
-													<input type="number" th:field="*{precio}" class="form-control"
-														id="exampleInputEmail1" th:attr="placeholder=${producto.precio}" step="0.01" min="0.01"
-														 />
+													<input type="number" th:field="*{precio}" class="form-control" step="0.01" min="0.01" th:attr="placeholder=${producto.precio}"/>
 												</div>
 												<div class="input-group mb-3">
 													<span class="input-group-text">Stock</span>
-													<input type="number" th:field="*{stock}" class="form-control"
-														id="exampleInputEmail1" th:attr="placeholder=${producto.stock}"
-														min="0" step="1"/>
+													<input type="number" th:field="*{stock}" class="form-control" min=0 th:attr="placeholder=${producto.stock}"/>
 												</div>
 												<div class="input-group mb-3">
 													<span class="input-group-text">Caracteristicas</span>

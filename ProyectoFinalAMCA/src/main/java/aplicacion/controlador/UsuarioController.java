@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import aplicacion.modelo.Rol;
 import aplicacion.modelo.Usuario;
+import aplicacion.modelo.dto.UsuarioDTO;
 import aplicacion.persistencia.RolRepo;
 import aplicacion.persistencia.UsuarioRepo;
+import aplicacion.servicio.interfaces.UsuarioService;
 
 
 @RequestMapping("/usuarios")
@@ -26,7 +28,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepo usuarioRepo;
 	@Autowired
-	private RolRepo rolRepo;
+	private UsuarioService usuarioService;
 
 	
 	@GetMapping(value={"","/"})
@@ -35,7 +37,7 @@ public class UsuarioController {
 		
 		List<Usuario> lista = usuarioRepo.findAll();
 		model.addAttribute("usuarios",lista );
-		model.addAttribute("nuevoUsuario",new Usuario() );
+		model.addAttribute("nuevoUsuario",new UsuarioDTO() );
 		model.addAttribute("usuarioaEditar", new Usuario());    
 		model.addAttribute("nombreNuevo", "");    
 		return "usuarios";
@@ -51,10 +53,8 @@ public class UsuarioController {
 	
 	
 	@PostMapping("/add")
-	public String addUsuario(@ModelAttribute("nuevoUsuario") Usuario usuario, BindingResult bindingResult) {
-		Rol rol = rolRepo.findById(1).get();
-		usuario.getRoles().add(rol);
-		usuarioRepo.save(usuario);
+	public String addUsuario(@ModelAttribute("nuevoUsuario") UsuarioDTO usuario, BindingResult bindingResult) {
+		usuarioService.save(usuario);
 		System.out.println("Insertando Usuario nuevo: "+usuario.getNombreApellidos());	
 				
 		return "redirect:/usuarios";	
