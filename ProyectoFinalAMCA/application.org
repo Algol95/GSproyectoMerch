@@ -3876,3 +3876,91 @@ java.io.NotSerializableException: aplicacion.modelo.Rol
 2023-03-24 21:15:04.178  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: obtenerUsuarioUsingGET_1
 2023-03-24 21:15:04.196  INFO 17368 --- [restartedMain] aplicacion.App                           : Started App in 2.122 seconds (JVM running for 129.809)
 2023-03-24 21:15:04.200  INFO 17368 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-03-24 21:26:56.478  INFO 17368 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-03-24 21:26:56.518  INFO 17368 --- [Thread-11] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-03-24 21:26:56.532  INFO 17368 --- [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-24 21:26:56.534  INFO 17368 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-03-24 21:26:56.538  INFO 17368 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-03-24 21:26:56.671  INFO 17368 --- [restartedMain] aplicacion.App                           : Starting App using Java 17.0.4.1 on DESKTOP-F770HS3 with PID 17368 (C:\Users\Usuario\Documents\repositorios\PoryectoFinalMerchSpring\ProyectoFinalAMCA\target\classes started by Ángel in C:\Users\Usuario\Documents\repositorios\PoryectoFinalMerchSpring\ProyectoFinalAMCA)
+2023-03-24 21:26:56.672  INFO 17368 --- [restartedMain] aplicacion.App                           : No active profile set, falling back to 1 default profile: "default"
+2023-03-24 21:26:57.277  INFO 17368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-24 21:26:57.326  INFO 17368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 5 JPA repository interfaces.
+2023-03-24 21:26:57.522  INFO 17368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8085 (http)
+2023-03-24 21:26:57.524  INFO 17368 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-03-24 21:26:57.525  INFO 17368 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-03-24 21:26:57.575  INFO 17368 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-03-24 21:26:57.575  INFO 17368 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 898 ms
+2023-03-24 21:26:57.647  INFO 17368 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-03-24 21:26:57.659  INFO 17368 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-03-24 21:26:57.675  INFO 17368 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-24 21:26:57.686  INFO 17368 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2023-03-24 21:26:57.874  INFO 17368 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-24 21:26:57.875  INFO 17368 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-24 21:26:58.134  WARN 17368 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-24 21:26:58.357  INFO 17368 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-03-24 21:26:58.377  WARN 17368 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/ignore1']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-03-24 21:26:58.378  INFO 17368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/ignore1']
+2023-03-24 21:26:58.378  WARN 17368 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/ignore2']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-03-24 21:26:58.380  INFO 17368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/ignore2']
+2023-03-24 21:26:58.387  INFO 17368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@371eeb16, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@263ee1a3, org.springframework.security.web.context.SecurityContextPersistenceFilter@110048aa, org.springframework.security.web.header.HeaderWriterFilter@6f5f72fc, org.springframework.security.web.authentication.logout.LogoutFilter@5c830cfb, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4b8f5714, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@403202e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@54ee408b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3b539b64, org.springframework.security.web.session.SessionManagementFilter@3f748a97, org.springframework.security.web.access.ExceptionTranslationFilter@3c3dbbc2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1e807e0e]
+2023-03-24 21:26:58.445  INFO 17368 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-03-24 21:26:58.459  INFO 17368 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-03-24 21:26:58.532  INFO 17368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8085 (http) with context path ''
+2023-03-24 21:26:58.533  INFO 17368 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-03-24 21:26:58.535  INFO 17368 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-03-24 21:26:58.542  INFO 17368 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-03-24 21:26:58.581  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: homeloginUsingGET_1
+2023-03-24 21:26:58.587  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: alumnosUsingGET_1
+2023-03-24 21:26:58.599  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: obtenerPedidoUsingGET_1
+2023-03-24 21:26:58.605  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: ProductosUsingGET_1
+2023-03-24 21:26:58.672  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: ProductosUsingGET_2
+2023-03-24 21:26:58.680  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: ProductosUsingGET_3
+2023-03-24 21:26:58.697  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addProductoUsingPOST_1
+2023-03-24 21:26:58.708  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: UsuariosUsingGET_1
+2023-03-24 21:26:58.738  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: obtenerUsuarioUsingGET_1
+2023-03-24 21:26:58.750  INFO 17368 --- [restartedMain] aplicacion.App                           : Started App in 2.136 seconds (JVM running for 844.363)
+2023-03-24 21:26:58.756  INFO 17368 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-03-24 21:27:40.948  INFO 17368 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-03-24 21:27:40.962  INFO 17368 --- [Thread-15] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-03-24 21:27:40.971  INFO 17368 --- [Thread-15] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-03-24 21:27:40.974  INFO 17368 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2023-03-24 21:27:40.978  INFO 17368 --- [Thread-15] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2023-03-24 21:27:41.103  INFO 17368 --- [restartedMain] aplicacion.App                           : Starting App using Java 17.0.4.1 on DESKTOP-F770HS3 with PID 17368 (C:\Users\Usuario\Documents\repositorios\PoryectoFinalMerchSpring\ProyectoFinalAMCA\target\classes started by Ángel in C:\Users\Usuario\Documents\repositorios\PoryectoFinalMerchSpring\ProyectoFinalAMCA)
+2023-03-24 21:27:41.106  INFO 17368 --- [restartedMain] aplicacion.App                           : No active profile set, falling back to 1 default profile: "default"
+2023-03-24 21:27:41.642  INFO 17368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-03-24 21:27:41.685  INFO 17368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39 ms. Found 5 JPA repository interfaces.
+2023-03-24 21:27:41.858  INFO 17368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8085 (http)
+2023-03-24 21:27:41.861  INFO 17368 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-03-24 21:27:41.863  INFO 17368 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.65]
+2023-03-24 21:27:41.913  INFO 17368 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-03-24 21:27:41.914  INFO 17368 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 803 ms
+2023-03-24 21:27:41.977  INFO 17368 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2023-03-24 21:27:41.984  INFO 17368 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2023-03-24 21:27:42.003  INFO 17368 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-03-24 21:27:42.016  INFO 17368 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2023-03-24 21:27:42.190  INFO 17368 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-03-24 21:27:42.190  INFO 17368 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-03-24 21:27:42.444  WARN 17368 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-03-24 21:27:42.655  INFO 17368 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2023-03-24 21:27:42.680  WARN 17368 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/ignore1']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-03-24 21:27:42.683  INFO 17368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/ignore1']
+2023-03-24 21:27:42.683  WARN 17368 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/ignore2']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-03-24 21:27:42.684  INFO 17368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/ignore2']
+2023-03-24 21:27:42.692  INFO 17368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@47cb2722, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3618cb6b, org.springframework.security.web.context.SecurityContextPersistenceFilter@66d6f7a7, org.springframework.security.web.header.HeaderWriterFilter@2c8ba0b7, org.springframework.security.web.authentication.logout.LogoutFilter@580b8f07, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@291c7cb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@672f1200, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1650984a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@70c790d3, org.springframework.security.web.session.SessionManagementFilter@684ee607, org.springframework.security.web.access.ExceptionTranslationFilter@3ef7f1ec, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@277c3cbf]
+2023-03-24 21:27:42.756  INFO 17368 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-03-24 21:27:42.766  INFO 17368 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-03-24 21:27:42.840  INFO 17368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8085 (http) with context path ''
+2023-03-24 21:27:42.841  INFO 17368 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2023-03-24 21:27:42.843  INFO 17368 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2023-03-24 21:27:42.850  INFO 17368 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2023-03-24 21:27:42.895  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: homeloginUsingGET_1
+2023-03-24 21:27:42.904  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: alumnosUsingGET_1
+2023-03-24 21:27:42.915  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: obtenerPedidoUsingGET_1
+2023-03-24 21:27:42.925  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: ProductosUsingGET_1
+2023-03-24 21:27:42.994  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: ProductosUsingGET_2
+2023-03-24 21:27:42.998  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: ProductosUsingGET_3
+2023-03-24 21:27:43.010  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addProductoUsingPOST_1
+2023-03-24 21:27:43.017  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: UsuariosUsingGET_1
+2023-03-24 21:27:43.041  INFO 17368 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: obtenerUsuarioUsingGET_1
+2023-03-24 21:27:43.060  INFO 17368 --- [restartedMain] aplicacion.App                           : Started App in 2.007 seconds (JVM running for 888.671)
+2023-03-24 21:27:43.063  INFO 17368 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
