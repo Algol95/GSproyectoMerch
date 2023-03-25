@@ -24,7 +24,6 @@ import aplicacion.persistencia.ProductoRepo;
 import aplicacion.persistencia.ProductosPedidosRepo;
 import aplicacion.persistencia.UsuarioRepo;
 
-
 @RequestMapping("/tienda")
 @Controller
 public class TiendaController {
@@ -48,21 +47,30 @@ public class TiendaController {
 		return "tienda";
 	}
 
-//	private boolean usuarioTienePedidos(Authentication authentication) {
-//		String username = authentication.getName();
-//		System.out.println(username);
-//		Usuario u = usuarioRepo.findByUsername(username).get();
-//		if (u.getPedidos().isEmpty()) {
-//			return false;
-//		} else {
-//			for (Pedido p : u.getPedidos()) {
-//				if (p.isPagado()) {
-//					return false;
-//				}
-//			}
-//		}
-//		return true;
-//	}
+	/**
+	 * Metodo que recorre la coleccion de pedidos de un usuario.
+	 * 
+	 * @param authentication
+	 * @return False si la coleccion esta vacia o todos los pedidos estan pagados.
+	 *         True si tiene algun pedido sin pagar.
+	 */
+	private boolean usuarioTienePedidos(Authentication authentication) {
+		String username = authentication.getName();
+		Usuario u = usuarioRepo.findByUsername(username).get();
+		if (u.getPedidos().isEmpty()) {
+			return false;
+		} else {
+			for (Pedido p : pedidoRepo.findAllByUsuario(u)) {
+				if (p.isPagado() == false) {
+					System.out.println("Hay un pedido sin pagar");
+					return true;
+				}
+			}
+			System.out.println("Este mensaje no se debe de mostar");
+			return false;
+		}
+
+	}
 
 	@GetMapping(value = "/addPedido/{id}")
 	public String insertarPedido(Model model) {
@@ -75,38 +83,45 @@ public class TiendaController {
 		try {
 			Usuario uActualizar = usuarioRepo.findByUsername(authentication.getName()).get();
 			Pedido pedidoNew = new Pedido();
-			ProductosPedidos productosPedidos = new ProductosPedidos() ;
-//			if (usuarioTienePedidos(authentication)==false) {
-			double precioTotal = productoRepo.findById(idPro).get().getPrecio() * undCompra.getCantidad();
-			pedidoNew = new Pedido(uActualizar.getDireccion(), uActualizar, precioTotal);
-			pedidoRepo.save(pedidoNew);
-					productosPedidos = new ProductosPedidos(pedidoNew, productoRepo.findById(idPro).get(),
-					undCompra.getCantidad());
+			ProductosPedidos productosPedidos = new ProductosPedidos();
+			if (usuarioTienePedidos(authentication) == false) {
+				double precioTotal = productoRepo.findById(idPro).get().getPrecio() * undCompra.getCantidad();
+				pedidoNew = new Pedido(uActualizar.getDireccion(), uActualizar, precioTotal);
+				pedidoRepo.save(pedidoNew);
+				productosPedidos = new ProductosPedidos(pedidoNew, productoRepo.findById(idPro).get(),
+				undCompra.getCantidad());
+				productosPedidosRepo.save(productosPedidos);
+
+			} else {
+				pedidoNew = pedidoRepo.findByPagado(false).get();
+				System.out.println(pedidoNew.toString());
+				boolean siNoExistePro = true;
+				for (ProductosPedidos proPed : pedidoNew.getProductosPedido()) {
+					if (proPed.getProducto().getId()==idPro) {
+						System.out.println("nya");
+						proPed.setCantidad(proPed.getCantidad() + undCompra.getCantidad());
+						pedidoNew.setPrecioTotal(pedidoNew.getPrecioTotal()+ undCompra.getCantidad()*productoRepo.findById(idPro).get().getPrecio());
+						productosPedidosRepo.save(proPed);
+						pedidoRepo.save(pedidoNew);
+						siNoExistePro = false;
+						break;
+					}
+				}
+				if (siNoExistePro) {
+					System.out.println("La id del pedido es: " +pedidoNew.getId());
+					pedidoNew.setPrecioTotal(pedidoNew.getPrecioTotal() + undCompra.getCantidad()*productoRepo.findById(idPro).get().getPrecio());
+					productosPedidos = new ProductosPedidos(pedidoNew,productoRepo.findById(idPro).get(), undCompra.getCantidad());
+					pedidoNew.getProductosPedido().add(productosPedidos);
+					pedidoRepo.save(pedidoNew);
 					productosPedidosRepo.save(productosPedidos);
+				}
+			}
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return "redirect:/tienda?error";
 		}
 
-//		} else {
-//			pedidoNew = pedidoRepo.findByPagado(false).get();
-//			productosPedidos = new ProductosPedidos(pedidoNew, productoRepo.findById(idPro).get(),undCompra.getCantidad());
-//			boolean controlProductoExiste=false;
-//			for (ProductosPedidos p : pedidoNew.getProductosPedido()) {
-//				if (p.getId()==productosPedidos.getId()) {
-//					p.setCantidad(p.getCantidad() + undCompra.getCantidad());
-//					double precioASumar = productoRepo.findById(idPro).get().getPrecio() * undCompra.getCantidad();
-//					pedidoNew.setPrecioTotal(pedidoNew.getPrecioTotal()+precioASumar);
-//					pedidoRepo.save(pedidoNew);
-//					productosPedidosRepo.save(p);
-//					controlProductoExiste = true;
-//					break;
-//				}
-//			}
-//			if (controlProductoExiste==false) {
-//				
-//			}
-//		}
-		return "redirect:/tienda?exito";
+		return "redirect:/cesta";
 	}
 
 }

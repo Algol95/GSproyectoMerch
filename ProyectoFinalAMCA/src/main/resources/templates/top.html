@@ -61,7 +61,7 @@
 					<div class="topbar-divider d-none d-sm-block"></div>
 
 					<li class="nav-item dropdown no-arrow" sec:authorize="isAuthenticated()">
-						<a class="nav-link dropdown-toggle text-gray-600"  role="button">
+						<a class="nav-link dropdown-toggle text-gray-600" role="button">
 							<i class="fas fa-basket-shopping fa-sm fa-fw mr-3 text-gray-600"></i>
 							Pedidos
 						</a>
@@ -76,20 +76,26 @@
 					</li>
 					<div class="topbar-divider d-none d-sm-block"></div>
 
-					
-				
+					<li class="nav-item dropdown no-arrow" sec:authorize="isAuthenticated()">
+						<a class="nav-link dropdown-toggle text-gray-600" href="/cesta" role="button">
+							<i class="fas fa-basket-shopping fa-sm fa-fw mr-3 text-gray-600"></i>
+							Mi Cesta
+						</a>
+					</li>
+					<div class="topbar-divider d-none d-sm-block"></div>
+
 
 					<!-- Nav Item - User Information -->
 
 					<li sec:authorize="isAuthenticated()" class="nav-item dropdown text-gray-900">
-						
+
 						<a class="nav-link dropdown-toggle text-gray-900" href="#" id="userDropdown" role="button"
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							 
-							 	Hola: <span sec:authentication = "principal.username" /> 
-						    
+
+							Hola: <span sec:authentication="principal.username" />
+
 						</a>
-						
+
 						<!-- Dropdown - User Information -->
 						<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 							aria-labelledby="userDropdown">
@@ -117,22 +123,22 @@
 								</a>
 								<div class="dropdown-divider"></div>
 							</div>
-							<a   class="dropdown-item" th:href="@{/logout}">
+							<a class="dropdown-item" th:href="@{/logout}">
 								<i class="fas fa-sign-out-alt fa-sm fa-fw mr-3 text-gray-600"></i>
-								<span >Cerrar Sesión</span>
+								<span>Cerrar Sesión</span>
 							</a>
 						</div>
 					</li>
-					 
+
 					<div class="topbar-divider d-none d-sm-block">
 
 						<li sec:authorize="isAnonymous()" class="nav-link  text-gray-600">
 							<a class="btn btn-primary btn-sm  " href="/login">Login</a>
 						</li>
-						<li sec:authorize="isAuthenticated()"class="nav-link  text-gray-600">
-						<form th:action="@{/logout}" method="post">
-							<input class="btn btn-primary btn-sm " type="submit" value="Sign Out" />
-						</form>
+						<li sec:authorize="isAuthenticated()" class="nav-link  text-gray-600">
+							<form th:action="@{/logout}" method="post">
+								<input class="btn btn-primary btn-sm " type="submit" value="Sign Out" />
+							</form>
 						</li>
 					</div>
 				</ul>

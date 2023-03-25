@@ -52,7 +52,7 @@ public class Pedido {
 //	private Set<Producto> productos;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_usu", nullable = false)
+	@JoinColumn(name = "idusu", nullable = false)
 	private Usuario usuario;
 
 	/**
