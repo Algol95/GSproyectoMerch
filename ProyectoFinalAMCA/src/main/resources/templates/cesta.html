@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<title>Productos</title>
+
+</head>
+
+<body id="page-top">
+	<!-- top -->
+	<!-- top -->
+	<!-- top -->
+	<div th:insert="top::top"></div>
+	<div class="container mt-4">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="mb-4">Tu cesta</h2>
+				<div class="card">
+					<div class="card-body">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Producto</th>
+									<th scope="col">Cantidad</th>
+									<th scope="col">Precio unitario</th>
+									<th scope="col">Precio total</th>
+									<th scope="col"></th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:if="${cesta.empty}">
+									<td colspan="6"> Tu cesta esta vacía</td>
+								</tr>
+								<tr th:each="productospedidos : ${cesta}">
+									<td>
+										<div class="row">
+											<div class="col-sm-2 hidden-xs">
+												<img src="https://via.placeholder.com/100x100" alt="producto"
+													class="img-fluid rounded" />
+											</div>
+											<div class="col-sm-10">
+												<h5 class="mt-0 mb-1" th:text="${productospedidos.producto.nombre}">
+													Nombre del producto</h5>
+											</div>
+										</div>
+									</td>
+									<td th:text="${productospedidos.cantidad}">Unidades</td>
+									<td th:text="${productospedidos.producto.precio}">Precio Unitario</td>
+									<td th:text="${productospedidos.cantidad*productospedidos.producto.precio}">Precio
+										Unidades</td>
+									<td><button type="button" class="btn btn-secondary" data-toggle="modal"
+											data-target="#modal-edit"
+											th:attr="data-target='#modal-edit'+${productospedidos.producto.id}"><i
+												class="fa-solid fa-pencil"></i></button></td>
+									<td><button type="button" class="btn btn-danger" data-toggle="modal"
+											data-target="#modal-delete"
+											th:attr="data-target='#modal-delete'+${productospedidos.producto.id}"><i
+												class="fa fa-trash"></i></button></td>
+									<!--Ventana Modal Edit-->
+									<div class="modal fade" th:id="modal-edit+${productospedidos.producto.id}">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="exampleModalLabel"><i
+															class="fa-solid fa-basket-shopping"></i> Cesta
+													</h4>
+													<button class="close" type="button" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true"><i class="fa-solid fa-x"></i></span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="row">
+														<div class="col-md-4">
+															<img class="img-fluid"
+																src="https://dummyimage.com/600x400/8f8f8f/ffffff.png"
+																alt="Imagen del producto">
+														</div>
+														<div class="col-md-8">
+															<h4 th:text="${productospedidos.producto.nombre}"></h4>
+															<p th:text="${productospedidos.producto.precio}+€"></p>
+															<p th:text=${productospedidos.producto.caracteristicas}></p>
+														</div>
+													</div>
+													<hr>
+													<form
+														th:action="@{/cesta/addProducto/{idPed}/{idPro}(idPed=${pedido.id}, idPro=${productospedidos.producto.id})}"
+														method="post" th:object="${undProPed}">
+														<div class="input-group mb-3">
+															<span class="input-group-text"
+																for="cantidad">Cantidad:</span>
+															<input type="number" class="form-control" id="cantidad"
+																th:field="*{cantidad}" value="1" min="1"
+																th:attr="max=${productospedidos.producto.stock}"
+																required>
+														</div>
+														<input type="submit" class="btn btn-primary" value="Comprar">
+													</form>
+												</div>
+												</form>
+											</div>
+										</div>
+									</div>
+									<!--delete modal-->
+									<div class="modal fade" th:id="modal-delete+${productospedidos.producto.id}">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="exampleModalLabel">Borrar</h4>
+													<button class="close" type="button" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true"><i class="fa-solid fa-x"></i></span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<p class="error-text"><strong>¿Seguro que deseas borrar el producto
+															'
+															<span th:text="${productospedidos.producto.nombre}"></span>
+															'de tu cesta?</strong></p>
+												</div>
+												<div class="modal-footer">
+													<button class="btn btn-secondary btn-sm" data-dismiss="modal"
+														aria-hidden="true">
+														Cancelar
+													</button>
+													<a
+														th:href="@{/cesta/delete/{idPed}/{idPro}(idPed=${pedido.id}, idPro=${productospedidos.producto.id})}">
+														<span class="btn btn-danger btn-sm"
+															value="delete">Borrar</span></a>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</tr>
+					</div>
+					<tr>
+						<td colspan="3" class="text-right">Total:</td>
+						<td th:text="${pedido.precioTotal}">Precio Total</td>
+						<td></td>
+						<td></td>
+					</tr>
+					</tbody>
+					</table>
+					<div class="text-right">
+						<button type="button" class="btn btn-secondary mr-2"
+							onclick="window.location.href='../tienda'">Seguir comprando</button>
+						<button type="button" class="btn btn-primary" data-target="#modal-pagar"
+							th:attr="disabled=${pagoDeshabilitado} ? 'disabled' : null, data-target='#modal-pagar'+${pedido.id}"
+							data-toggle="modal">Pagar</button>
+						<!--pagar modal-->
+						<div class="modal fade" th:id="modal-pagar+${pedido.id}">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h4 class="modal-title" id="exampleModalLabel">Realizar Compra</h4>
+										<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true"><i class="fa-solid fa-x"></i></span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<p class="error-text"><strong>¿Estas segur@ de realizar esta compra por '<span th:text="${pedido.precioTotal}"></span>€' ?</strong></p>
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-secondary btn-sm" data-dismiss="modal"
+											aria-hidden="true">
+											Cancelar
+										</button>
+										<a
+											th:href="@{/cesta/pagar/{idPed}(idPed=${pedido.id})}">
+											<span class="btn btn-success btn-sm" value="delete">Pagar</span></a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+</body>
+
+
+</html>

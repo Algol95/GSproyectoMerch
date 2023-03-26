@@ -39,7 +39,7 @@ public class Usuario implements UserDetails {
 	@Column(name="direccion")
 	private String direccion;
 	
-	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
 	private Collection<Rol> roles;
 	
 	@OneToMany(mappedBy= "usuario",  fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -75,6 +75,7 @@ public class Usuario implements UserDetails {
 	
 	public Usuario() {
 		roles = new HashSet<Rol>();
+		pedidos = new HashSet<Pedido>();
 	}
 	
 

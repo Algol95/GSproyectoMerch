@@ -29,6 +29,8 @@ public class UsuarioController {
 	private UsuarioRepo usuarioRepo;
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private RolRepo rolRepo;
 
 	
 	@GetMapping(value={"","/"})
@@ -99,6 +101,7 @@ public class UsuarioController {
 	@GetMapping({"/delete/{id}"})
 	public String borrarUsuario(@PathVariable Integer id) {
 		
+		rolRepo.findById(1).get().getUsuarios().remove(usuarioRepo.findById(id).get());
 		usuarioRepo.deleteById(id);
 		
 		return "redirect:/usuarios";
