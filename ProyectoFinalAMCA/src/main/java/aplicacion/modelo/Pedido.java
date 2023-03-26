@@ -35,7 +35,7 @@ public class Pedido {
 	private String direccion;
 	
 	@Column(name="precio_total")
-	private double precioTotal = 0;
+	private Double precioTotal;
 	
 	@Column(name="pagado")
 	private boolean pagado;
@@ -127,14 +127,14 @@ public class Pedido {
 	/**
 	 * @return the precioTotal
 	 */
-	public double getPrecioTotal() {
+	public Double getPrecioTotal() {
 		return precioTotal;
 	}
 
 	/**
 	 * @param precioTotal the precioTotal to set
 	 */
-	public void setPrecioTotal(double precioTotal) {
+	public void setPrecioTotal(Double precioTotal) {
 		this.precioTotal = precioTotal;
 	}
 
@@ -187,10 +187,6 @@ public class Pedido {
     public int hashCode() {
         return Objects.hash(direccion);
     }
-//	public void calcularPrecioTotal () {
-//		for (Producto p : productos) {
-//			precioTotal += p.getPrecio();
-//		}
-//	}
+
 	
 }

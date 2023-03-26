@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<title>Productos</title>
+
+</head>
+
+<body id="page-top">
+	<!-- top -->
+	<!-- top -->
+	<!-- top -->
+	<div th:insert="top::top"></div>
+	<div class="container">
+
+
+		<div class="m-5">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item">
+						<a href="/">
+							<i class="fas fa-home fa-sm fa-fw mr-3 text-gray-600"></i>
+						</a>
+					</li>
+					<li class="breadcrumb-item">Pedidos</li>
+				</ol>
+			</nav>
+		</div>
+
+		<table class="table  table-hover">
+			<thead class="table-dark bg-info text-white  ">
+				<tr>
+					<th scope="col"> Id </th>
+					<th scope="col"> Usuario</th>
+					<th scope="col"> Direccion</th>
+					<th scope="col"> Precio Total</th>
+					<th scope="col"> Entregado </th>
+					<th scope="col"> Pagado </th>
+					<th scope="col"> Editar </th>
+					<th scope="col"> Borrar </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${pedidos.empty}">
+					<td colspan="8"> No hay productos</td>
+				</tr>
+				<tr th:each="pedido : ${pedidos}">
+
+					<td>
+						<span class="btn btn -primary btn-sm" th:text="${pedido.id}">ID pedido</span>
+					</td>
+					<td>
+						<span th:text="${pedido.usuario.username}">Username</span>
+					</td>
+					<td>
+						<span th:text="${pedido.direccion}">Direccion</span>
+					</td>
+					<td>
+						<span th:text="${pedido.precioTotal}+€">Precio Total</span>
+					</td>
+					<td>
+						<div th:with="claseEntregado=(${pedido.entregado} ? 'bg-success' : 'bg-primary')">
+							<span th:text="${pedido.entregado ? 'Entregado' : 'En reparto'}" class="badge rounded-pill"
+								th:classappend="${claseEntregado}">Entregado</span>
+						</div>
+					</td>
+					<td>
+						<div th:with="clasePagado=(${pedido.pagado} ? 'bg-success' : 'bg-secondary')">
+							<span th:text="${pedido.pagado ? 'Pagado' : 'Sin pagar'}" class="badge rounded-pill"
+								th:classappend="${clasePagado}">Pagado</span>
+						</div>
+					</td>
+					<td>
+						<a class="btn btn-primary btn-sm btn-sm text-white pointer" style="cursor:pointer"
+							data-toggle="modal" data-target="#modal-edit"
+							th:attr="data-target='#modal-edit'+${pedido.id}">
+							<i class="fa-solid fa-pen"></i>
+						</a>
+					</td>
+					<td>
+						<a class="btn btn-danger btn-sm text-white pointer" style="cursor:pointer" data-toggle="modal"
+							data-target="#modal-delete" th:attr="data-target='#modal-delete'+${pedido.id}">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>
+					</td>
+
+
+					<!-- edit modal-->
+					<div class="modal fade" th:id="modal-edit+${pedido.id}">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="exampleModalLabel">Editar</h4>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><i class="fa-solid fa-x"></i></span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p class="error-text">Introduce parametros nuevos del pedido:
+									</p>
+
+
+									<!-- Formulario edit-->
+									<form action="#" th:action="@{/pedidos/edit/{id}(id=${pedido.id})}"
+										th:object="${pedidoaEditar}" method="post">
+										<div class="form-row">
+											<div class="form-group  mt-1">
+												<div class="input-group mb-3">
+													<span class="input-group-text">Direccion</span>
+													<input type="text" th:field="*{direccion}" class="form-control"
+														th:attr="placeholder=${pedido.direccion}" />
+												</div>
+												<div class="input-group mb-3">
+													<span class="input-group-text">Stock</span>
+													<input type="number" th:field="*{precioTotal}" class="form-control"
+														min=0 step=0.01 th:attr="placeholder=${pedido.precioTotal}" />
+												</div>
+												<div class="input-group mb-3">
+													<label for="entregado">Entregado:</label>
+													<input type="checkbox" id="entregado" th:field="*{entregado}" th:checked="${pedido.entregado}"/>
+												</div>
+												<div class="input-group mb-3">
+													<label for="pagado">Pagado:</label>
+													<input type="checkbox" id="pagado" th:field="*{pagado}" th:checked="${pedido.pagado}"/>
+												</div>
+											</div>
+										</div>
+
+
+
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">
+										Cancelar
+									</button>
+									<input type="submit" value="Editar" class="btn btn-primary float-right">
+
+								</div>
+								</form>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--end edit modal-->
+
+					<!--delete modal-->
+					<div class="modal fade" th:id="modal-delete+${pedido.id}">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="exampleModalLabel">Borrar</h4>
+									<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true"><i class="fa-solid fa-x"></i></span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<p class="error-text"><strong>¿Seguro que deseas borrar el pedido
+											<span th:text="${pedido.id}"></span>?</strong></p>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-secondary btn-sm" data-dismiss="modal" aria-hidden="true">
+										Cancelar
+									</button>
+									<a th:href="@{/pedidos/delete/{id}(id=${pedido.id})}">
+									<span class="btn btn-danger btn-sm" value="delete">Borrar</span></a>
+
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!--end delete modal-->
+
+
+
+				</tr>
+			</tbody>
+		</table>
+
+
+		<div class="col-2 float-right">
+			<div class="p-5">
+				<button type="button" class="btn btn-primary float-right" data-toggle="modal"
+					data-target="#crearMensaje">
+					<i class="fa-solid fa-plus"></i>
+				</button>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+
+</html>

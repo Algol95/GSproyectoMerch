@@ -69,10 +69,13 @@ public class CestaController {
 				if (productosPedidosAct.getProducto().getId() == idPro) {
 					int cantidadAnterior = productosPedidosAct.getCantidad();
 					double precioProductosAnterior = cantidadAnterior * pro.getPrecio();
+					int stockAnterior = productosPedidosAct.getCantidad() + pro.getStock();
 					productosPedidosAct.setCantidad(cantidadCompra);
 					pedidoAct.setPrecioTotal(
 							pedidoAct.getPrecioTotal() - precioProductosAnterior + cantidadCompra * pro.getPrecio());
 					productosPedidosAct.setPedido(pedidoAct);
+					pro.setStock(stockAnterior - undCompra.getCantidad());
+					productoRepo.save(pro);
 					productosPedidosRepo.save(productosPedidosAct);
 					pedidoRepo.save(pedidoAct);
 				}

@@ -84,13 +84,17 @@ public class TiendaController {
 			Usuario uActualizar = usuarioRepo.findByUsername(authentication.getName()).get();
 			Pedido pedidoNew = new Pedido();
 			ProductosPedidos productosPedidos = new ProductosPedidos();
+			Producto proNew = productoRepo.findById(idPro).get();
 			if (usuarioTienePedidos(authentication) == false) {
 				double precioTotal = productoRepo.findById(idPro).get().getPrecio() * undCompra.getCantidad();
 				pedidoNew = new Pedido(uActualizar.getDireccion(), uActualizar, precioTotal);
 				pedidoRepo.save(pedidoNew);
 				productosPedidos = new ProductosPedidos(pedidoNew, productoRepo.findById(idPro).get(),
 				undCompra.getCantidad());
+				proNew.setStock(proNew.getStock() - undCompra.getCantidad());
+				productoRepo.save(proNew);
 				productosPedidosRepo.save(productosPedidos);
+				
 
 			} else {
 				pedidoNew = pedidoRepo.findByPagado(false).get();
@@ -113,6 +117,8 @@ public class TiendaController {
 					pedidoRepo.save(pedidoNew);
 					productosPedidosRepo.save(productosPedidos);
 				}
+				proNew.setStock(proNew.getStock() - undCompra.getCantidad());
+				productoRepo.save(proNew);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

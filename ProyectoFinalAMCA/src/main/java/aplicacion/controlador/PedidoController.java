@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.datatype.jdk8.WrappedIOException;
+
 import aplicacion.modelo.*;
 import aplicacion.persistencia.PedidoRepo;
 import aplicacion.persistencia.ProductoRepo;
+import aplicacion.persistencia.ProductosPedidosRepo;
 import aplicacion.persistencia.UsuarioRepo;
 
 
@@ -27,58 +30,50 @@ public class PedidoController {
 	private PedidoRepo pedidoRepo;
 	@Autowired
 	private ProductoRepo productoRepo;
+	@Autowired
+	private ProductosPedidosRepo productosPedidosRepo;
 
 	@GetMapping(value = { "", "/" })
 	String pedidos(Model model) {
 
-		model.addAttribute("usuarios", usuarioRepo.findAll());
-		model.addAttribute("listaproductos", productoRepo.findAll());
 		model.addAttribute("pedidos", pedidoRepo.findAll());
-		model.addAttribute("pedidoNuevo", new Pedido());
+		model.addAttribute("pedidoaEditar", new Pedido());
 
 		return "pedidos";
 	}
-
-//	@PostMapping("/add")
-//	public String addPedido(@ModelAttribute("pedidoNuevo") Pedido pedidoNuevo, BindingResult bindingResult) {
-//
-//		pedidoNuevo.calcularPrecioTotal();
-//
-//		Usuario usuCliente = usuarioRepo.findById(pedidoNuevo.getUsuario().getId()).get();
-//
-//		usuCliente.getPedidos().add(pedidoNuevo);
-//		pedidoNuevo.setUsuario(usuCliente);
-//		pedidoNuevo.setDireccion(usuCliente.getDireccion());
-//
-//		pedidoRepo.save(pedidoNuevo);
-//
-//		for (Producto pro : pedidoNuevo.getProductos()) {
-//			pro.getPedidos().add(pedidoNuevo);
-//			pro.setStock(pro.getStock()-1);
-//			productoRepo.save(pro);
-//		}
-//
-//		return "redirect:/pedidos";
-//	}
-
-	@GetMapping({ "/{id}" })
-	public String obtenerPedido(Model model, @PathVariable Integer id) {
-
-		model.addAttribute("usuario", usuarioRepo.findById(id).get());
-
-		return "pedido";
-	}
-
-	@GetMapping({ "/buscar/{nombre}" })
-	public String obtenerPedido(@PathVariable String nombre) {
-		return "pedido";
-	}
-
-	@GetMapping({ "/delete/{id}" })
-	public String borrarPedido(@PathVariable Integer id) {
-
+	
+	@PostMapping("/edit/{id}")
+	public String editarPedido(@PathVariable Integer id, @ModelAttribute("pedidoaEditar") Pedido pedido, BindingResult bindingResult) {
+		
+		Pedido pedActualizar = pedidoRepo.findById(id).get();
+		if(pedido.getDireccion() != "") {
+			pedActualizar.setDireccion(pedido.getDireccion());
+		}
+		
+		if(pedido.getPrecioTotal() != null) {
+			pedActualizar.setPrecioTotal(pedido.getPrecioTotal());
+		}
+		if(pedido.isEntregado() != pedActualizar.isEntregado()) {
+			pedActualizar.setEntregado(pedido.isEntregado());
+		}
+		if(pedido.isPagado() != pedActualizar.isPagado()) {
+			pedActualizar.setPagado(pedido.isPagado());
+		}
+		
+		pedidoRepo.save(pedActualizar);
+		
 		return "redirect:/pedidos";
-
+		 
+	} 
+	
+	@GetMapping("/delete/{id}")
+	public String deletePedido(@PathVariable Integer id) {
+		Pedido pedidoDel = pedidoRepo.findById(id).get();
+		for (ProductosPedidos proPed : pedidoDel.getProductos() ) {
+			productosPedidosRepo.delete(proPed);
+		}
+		pedidoRepo.delete(pedidoDel);
+		return "redirect:/pedidos";
 	}
 
 }

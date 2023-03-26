@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-03-2023 a las 22:45:43
+-- Tiempo de generación: 26-03-2023 a las 22:45:33
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 
 INSERT INTO `producto` (`id`, `caracteristicas`, `nombre`, `precio`, `stock`) VALUES
-(1, 'Pegatinas de Emojis:\r\n- Pack de 5 Stickers.\r\n- Laminas de vinilo serigrafiadas', 'Pegatina', 2.5, 20);
+(10, 'Peluche de Pikachu que se parece a cualquier cosa menos a un Pikachu.', 'Peluche Pikachu', 35, 30);
 
 --
 -- Volcado de datos para la tabla `rol`
@@ -48,7 +48,7 @@ INSERT INTO `roles_usuarios` (`id_rol`, `id_usuario`) VALUES
 --
 
 INSERT INTO `usuario` (`id`, `direccion`, `correo_electronico`, `nombre_apellidos`, `password`, `nick`) VALUES
-(16, 'admin', 'admin@merch.com', 'admin istrador', '$2a$10$M.DVg75F9/IJQw4fUnkSa.F/0yWc8v2hmPhU6ctU4cJwJ0ueqa.mu', 'admin');
+(16, 'admin', 'admin@merch.com', 'administrador', '$2a$10$M.DVg75F9/IJQw4fUnkSa.F/0yWc8v2hmPhU6ctU4cJwJ0ueqa.mu', 'admin');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

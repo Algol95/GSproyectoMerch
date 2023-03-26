@@ -49,7 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					).anonymous()
 			.antMatchers("/productos**",
 					"/usuarios**",
-					"/admin").hasRole("ADMIN")
+					"/admin",
+					"/pedidos**").hasRole("ADMIN")
 			.antMatchers("/tienda","/usuario","/cesta","/mispedidos").authenticated()
 			.and()
 			.formLogin()
