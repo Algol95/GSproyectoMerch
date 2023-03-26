@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:insert="librerias::librerias">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<title>Mis Pedidos</title>
+
+</head>
+
+<body id="page-top">
+	<!-- top -->
+	<!-- top -->
+	<!-- top -->
+	<div th:insert="top::top"></div>
+	<div class="container my-5">
+		<h1 class="text-center mb-5">Lista de Pedidos</h1>
+		<div class="row">
+			<div class="col-md-10 mx-auto">
+				<div class="list-group">
+					<!-- Iterar sobre cada pedido -->
+					<th:block th:each="pedido : ${pedidos}">
+						<div>
+							<div class="list-group-item list-group-item-action">
+								<!-- Mostrar información del pedido -->
+								<h5 class="mb-3">Pedido #<span th:text="${pedido.id}"></span></h5>
+								<ul class="list-unstyled">
+									<!-- Iterar sobre cada producto del pedido -->
+									<th:block th:each="productospedidos : ${pedido.productos}">
+										<li>
+											<!-- Mostrar información del producto -->
+											<div class="row">
+												<div class="col-8">
+													<h6 class="mb-0" th:text="${productospedidos.producto.nombre}"></h6>
+													<small class="text-muted"
+														th:text="x+${productospedidos.cantidad}"></small>
+												</div>
+											</div>
+										</li>
+									</th:block>
+									<li class="list-group-item d-flex justify-content-between">
+										<span><strong>Total:</strong></span>
+										<span th:text="${pedido.precioTotal}+€"></span>
+									</li>
+								</ul>
+								<p class="mb-0"><strong>Dirección:</strong> <span th:text="${pedido.direccion}"></span>
+								</p>
+								<p><strong>Estado:</strong>
+								<div th:with="claseEntregado=(${pedido.entregado} ? 'bg-success' : 'bg-primary')">
+									<span th:text="${pedido.entregado ? 'Entregado' : 'En reparto'}" class="badge rounded-pill"
+										th:classappend="${claseEntregado}"></span>
+								</div>
+								</p>
+							</div>
+						</div>
+					</th:block>
+
+</body>
+
+
+</html>

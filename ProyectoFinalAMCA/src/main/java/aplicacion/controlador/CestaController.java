@@ -46,7 +46,7 @@ public class CestaController {
 		Set<ProductosPedidos> cesta = new HashSet<ProductosPedidos>();
 		for (Pedido p : pedidoRepo.findAllByUsuario(usuarioRepo.findByUsername(userAuth).get())) {
 			if (p.isPagado() == false) {
-				cesta = p.getProductosPedido();
+				cesta = p.getProductos();
 				pedido = p;
 				break;
 			}
@@ -65,7 +65,7 @@ public class CestaController {
 			Pedido pedidoAct = pedidoRepo.findById(idPed).get();
 			Producto pro = productoRepo.findById(idPro).get();
 			int cantidadCompra = undCompra.getCantidad();
-			for (ProductosPedidos productosPedidosAct : pedidoAct.getProductosPedido()) {
+			for (ProductosPedidos productosPedidosAct : pedidoAct.getProductos()) {
 				if (productosPedidosAct.getProducto().getId() == idPro) {
 					int cantidadAnterior = productosPedidosAct.getCantidad();
 					double precioProductosAnterior = cantidadAnterior * pro.getPrecio();
@@ -89,16 +89,16 @@ public class CestaController {
 	public String deleteProducto(@PathVariable Integer idPed, @PathVariable Integer idPro) {
 		Pedido pedidoDel = pedidoRepo.findById(idPed).get();
 		Producto pro = productoRepo.findById(idPro).get();
-		for (ProductosPedidos productosPedidosDel : pedidoDel.getProductosPedido()) {
+		for (ProductosPedidos productosPedidosDel : pedidoDel.getProductos()) {
 			if(productosPedidosDel.getProducto().getId()==idPro) {
 				int cantidadAnterior = productosPedidosDel.getCantidad();
 				double precioProductosAnterior = cantidadAnterior * pro.getPrecio();
 				pro.getPedidos().remove(productosPedidosDel);
 				productoRepo.save(pro);
-				pedidoDel.getProductosPedido().remove(productosPedidosDel);
+				pedidoDel.getProductos().remove(productosPedidosDel);
 				pedidoRepo.save(pedidoDel);
 				productosPedidosRepo.delete(productosPedidosDel);
-				if(pedidoDel.getProductosPedido().isEmpty()) {
+				if(pedidoDel.getProductos().isEmpty()) {
 					pedidoRepo.delete(pedidoDel);
 				} else {
 					pedidoDel.setPrecioTotal(pedidoDel.getPrecioTotal()-precioProductosAnterior);
@@ -112,10 +112,13 @@ public class CestaController {
 	@GetMapping("/pagar/{idPed}")
 	public String pagarPedido(@PathVariable Integer idPed) {
 		Pedido pedidoPagado = pedidoRepo.findById(idPed).get();
-
 		pedidoPagado.setPagado(true);
+		for (ProductosPedidos productosPedidos : pedidoPagado.getProductos()) {
+			productosPedidos.getPedido().setPagado(true);
+			productosPedidosRepo.save(productosPedidos);
+		}
 		pedidoRepo.save(pedidoPagado);
-		return "redirect:/cesta";
+		return "redirect:/mispedidos";
 	}
 
 }

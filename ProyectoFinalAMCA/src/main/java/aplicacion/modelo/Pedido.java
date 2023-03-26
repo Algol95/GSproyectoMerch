@@ -167,11 +167,11 @@ public class Pedido {
 		this.pagado = pagado;
 	}
 
-	public Set<ProductosPedidos> getProductosPedido() {
+	public Set<ProductosPedidos> getProductos() {
 		return productos;
 	}
 
-	public void setProductsPedidos(Set<ProductosPedidos> productos) {
+	public void setProductos(Set<ProductosPedidos> productos) {
 		this.productos = productos;
 	}
 

@@ -29,7 +29,7 @@ public class PedidoController {
 	private ProductoRepo productoRepo;
 
 	@GetMapping(value = { "", "/" })
-	String alumnos(Model model) {
+	String pedidos(Model model) {
 
 		model.addAttribute("usuarios", usuarioRepo.findAll());
 		model.addAttribute("listaproductos", productoRepo.findAll());

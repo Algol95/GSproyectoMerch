@@ -96,7 +96,7 @@ public class TiendaController {
 				pedidoNew = pedidoRepo.findByPagado(false).get();
 				System.out.println(pedidoNew.toString());
 				boolean siNoExistePro = true;
-				for (ProductosPedidos proPed : pedidoNew.getProductosPedido()) {
+				for (ProductosPedidos proPed : pedidoNew.getProductos()) {
 					if (proPed.getProducto().getId()==idPro) {
 						proPed.setCantidad(proPed.getCantidad() + undCompra.getCantidad());
 						pedidoNew.setPrecioTotal(pedidoNew.getPrecioTotal()+ undCompra.getCantidad()*productoRepo.findById(idPro).get().getPrecio());
@@ -109,7 +109,7 @@ public class TiendaController {
 				if (siNoExistePro) {
 					pedidoNew.setPrecioTotal(pedidoNew.getPrecioTotal() + undCompra.getCantidad()*productoRepo.findById(idPro).get().getPrecio());
 					productosPedidos = new ProductosPedidos(pedidoNew,productoRepo.findById(idPro).get(), undCompra.getCantidad());
-					pedidoNew.getProductosPedido().add(productosPedidos);
+					pedidoNew.getProductos().add(productosPedidos);
 					pedidoRepo.save(pedidoNew);
 					productosPedidosRepo.save(productosPedidos);
 				}
